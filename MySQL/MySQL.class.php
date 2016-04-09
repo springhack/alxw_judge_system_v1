@@ -1,7 +1,7 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-01-31 02:39:08
-        Filename: ../MySQL/MySQL.class.php
+        Last modified: 2016-04-09 20:09:30
+        Filename: MySQL/MySQL.class.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
 <?php

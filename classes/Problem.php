@@ -1,6 +1,6 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-01-21 00:23:23
+        Last modified: 2016-04-09 21:23:32
         Filename: Problem.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
@@ -27,9 +27,9 @@
 			return $this->problem->getInfo();
 		}
 		
-		public function submitCode($lang = "0", $code = "")
+		public function submitCode($lang = "0", $code = "", $cid = '0')
 		{
-			return $this->problem->submitCode($this->oj, $this->id, $lang, $code);
+			return $this->problem->submitCode($this->oj, $this->id, $lang, $code, $cid);
 		}
 		
 		public function getEncodeScript()

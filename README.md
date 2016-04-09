@@ -31,9 +31,13 @@ PS: GPL保证你可以合法忽略以上注意事项但不能保证你不受鄙�
 
 Linux新手请看鸟哥的私房菜http://vbird.dic.ksu.edu.tw/linux_basic/linux_basic.php
 
-目前维护者 SpringHack springhack@live.cn http://blog.90its.cn/
+目前维护者:	SpringHack	springhack@live.cn	http://blog.90its.cn/
+
 最新更新
 
+    添加多比赛支持
+    更改默认主题为Material Design
+    更新判题逻辑部分代码
     更名为AlxwVJ，二次重开发
     多进程优化，判题提速100%
     提交界面代码亮显

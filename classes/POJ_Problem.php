@@ -1,6 +1,6 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-01-31 03:07:51
+        Last modified: 2016-04-09 21:23:09
         Filename: POJ_Problem.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
@@ -41,9 +41,9 @@
 			return $this->pro_info;
 		}
 		
-		public function submitCode($oj = "POJ", $id = "1000", $lang = "0", $code = "")
+		public function submitCode($oj = "POJ", $id = "1000", $lang = "0", $code = "", $cid = '0')
 		{
-			$this->pro_submit = new DataPoster($oj, $id, $lang, $code);
+			$this->pro_submit = new DataPoster($oj, $id, $lang, $code, $cid);
 		}
 		
 	}

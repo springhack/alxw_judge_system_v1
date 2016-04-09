@@ -1,7 +1,7 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-01-21 00:35:35
-        Filename: ../submit.php
+        Last modified: 2016-04-09 22:12:22
+        Filename: submit.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
 <?php
@@ -9,13 +9,23 @@
 	if (!$app->user->isLogin())
 		die('<center><a href=\'admin/status.php?action=login&url=../index.php\'>Please login or register first!</a></center>');
 	require_once("classes/Problem.php");
+	/**
 	$start = $app->setting->get("startTime", time() + 10);
 	if ($start>time())
 		die('<center><h1><a href="index.php" style="color: #000000;">Contest not start !</a></h1></center></body></html>');
 	$end = $app->setting->get("endTime", time() + 10);
 	if ($end<time())
 		die('<center><h1><a href="index.php" style="color: #000000;">Contest have finished !</a></h1></center></body></html>');
+	**/
 	$db = new MySQL();
+	if (isset($_GET['cid']))
+	{
+		$res = $db->from('Contest')->where("`id`='".intval($_GET['cid'])."'")->select()->fetch_one();
+		if ($res['time_s'] > time())
+			die('<center><h1><a href="index.php" style="color: #000000;">Contest not start !</a></h1></center></body></html>');
+		if ($res['time_e'] < time())
+			die('<center><h1><a href="index.php" style="color: #000000;">Contest finished !</a></h1></center></body></html>');
+	}
 	$info = $db->from("Problem")->where("`id` = '".$_GET['id']."'")->select()->fetch_one();
 	$pro = new Problem($info['pid'], $info['oj']);
 	if (isset($_POST['lang']) && isset($_POST['code']))
@@ -26,7 +36,7 @@
 				die('<center><a href=\'index.php\'>Please submit 10s later !</a></center>');
 		}
 		$_SESSION['lasttime'] = time();
-		$pro->submitCode($_POST['lang'], $_POST['code']);
+		$pro->submitCode($_POST['lang'], $_POST['code'], isset($_GET['cid'])?$_GET['cid']:'0');
 		header("Location: result.php?id=".$_SESSION['last_id']);
 	}
 ?>
@@ -55,7 +65,10 @@
         <center>
         <?php require_once("header.php"); ?>
         <h1>Submit Code</h1>
-        <form action="submit.php?id=<?php echo $_GET['id']; ?>" method="post" onsubmit="return encodeSource()">
+        <form action="submit.php?<?php
+			if (isset($_GET['cid']))
+				echo 'cid='.$_GET['cid'].'&';
+		?>id=<?php echo $_GET['id']; ?>" method="post" onsubmit="return encodeSource()">
         <table border="1">
         	<tr>
         		<td>

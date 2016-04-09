@@ -1,6 +1,6 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-04-09 15:20:25
+        Last modified: 2016-04-09 22:13:46
         Filename: header.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
@@ -8,11 +8,17 @@
 			<script language="javascript" src="resource.php?type=js"></script>
 			<link rel="stylesheet" href="resource.php?type=css" type="text/css" />
 			<div class='header'>
-				<div class='navigator'>
+				<div class='navigator<?php echo isset($_GET['cid'])?' contest':''; ?>'>
 						<h2 style='display: inline-block;'>Virtual Judge</h2><font style='display: inline-block; width: 220px;'>&nbsp;</font>
                     	<a href="index.php">首页</a><font style='display: inline-block; width: 40px;'>&nbsp;</font>
-                    	<a href="rank.php">排名</a><font style='display: inline-block; width: 40px;'>&nbsp;</font>
+						<?php if (!isset($_GET['cid'])) { ?>
+                    	<a href="contest.php">比赛</a><font style='display: inline-block; width: 40px;'>&nbsp;</font>
                     	<a href="status.php">状态</a><font style='display: inline-block; width: 40px;'>&nbsp;</font>
+						<?php } else { ?>
+                    	<a href="index.php<?php echo isset($_GET['cid'])?'?cid='.$_GET['cid']:''; ?>">题目</a><font style='display: inline-block; width: 40px;'>&nbsp;</font>
+                    	<a href="rank.php<?php echo isset($_GET['cid'])?'?cid='.$_GET['cid']:''; ?>">排名</a><font style='display: inline-block; width: 40px;'>&nbsp;</font>
+                    	<a href="status.php<?php echo isset($_GET['cid'])?'?cid='.$_GET['cid']:''; ?>">状态</a><font style='display: inline-block; width: 40px;'>&nbsp;</font>
+						<?php } ?>
                     	<?php
                         	require_once("api.php");
 							if ($app->user->isLogin())

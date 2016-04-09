@@ -1,6 +1,6 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-04-09 15:25:57
+        Last modified: 2016-04-09 21:14:17
         Filename: index.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
@@ -22,7 +22,7 @@
         	<?php require_once("header.php"); ?>
         	<h1>Problems List</h1>
     	<?php
-			$sstart = isset($_GET['page'])?(intval($_GET['page'])-1)*100:0;
+			$sstart = isset($_GET['page'])?(intval($_GET['page'])-1)*10:0;
 			require_once("api.php");
 			$db = new MySQL();
 			if ($db->query("SHOW TABLES LIKE 'Problem'")->num_rows() != 1)
@@ -34,13 +34,23 @@
 						'oj' => 'text'
 					))->create("Problem");
 			}
-			$start = $app->setting->get("startTime", time() + 10);
-			if ($start>time())
-				die('<center><h1><a href="index.php" style="color: #000000;">Contest not start !</a></h1></center></body></html>');
-			$list = $db->from("Problem")->limit(100, $sstart)->select()->fetch_all();
 			echo "<table border='1'><tr><td width='100'>Problem ID</td><td width='500'>Problem Title</td></tr>";
-			for ($i=0;$i<count($list);++$i)
-				echo "<tr><td width='100'>".(intval($i)+1)."</td><td width='500'><a href='view.php?id=".$list[$i]['id']."'>".$list[$i]['title']."</a></td></tr>";
+			if (isset($_GET['cid']))
+			{
+				$res = $db->from('Contest')->where("`id`='".intval($_GET['cid'])."'")->select()->fetch_one();
+				if ($res['time_s'] > time())
+					die('<center><h1><a href="index.php" style="color: #000000;">Contest not start !</a></h1></center></body></html>');
+				$ll = explode(',', $res['list']);
+				for ($i=0;$i<count($ll);++$i)
+				{
+					$list = $db->from('Problem')->where("`id`='".$ll[$i]."'")->select()->fetch_one();
+					echo "<tr><td width='100'>".(intval($i)+1)."</td><td width='500'><a href='view.php?cid=".$_GET['cid']."&id=".$list['id']."'>".$list['title']."</a></td></tr>";
+				}
+			} else {
+				$list = $db->from("Problem")->limit(10, $sstart)->select()->fetch_all();
+				for ($i=0;$i<count($list);++$i)
+					echo "<tr><td width='100'>".$list[$i]['id']."</td><td width='500'><a href='view.php?id=".$list[$i]['id']."'>".$list[$i]['title']."</a></td></tr>";
+			}
 			echo "</table>";
 		?><br /><br />
 		<script language="javascript" src="Widget/pageSwitcher/pageSwitcher.js"></script>

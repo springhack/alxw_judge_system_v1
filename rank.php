@@ -1,6 +1,6 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-02-08 10:29:49
+        Last modified: 2016-04-09 22:03:02
         Filename: rank.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
@@ -22,23 +22,22 @@
 				}
 				return $result;
 			}
+            if (!isset($_GET['cid']))
+                die('<center><h1><a href="index.php" style="color: #000000;">No such contest !</a></h1></center></body></html>');
 		?>
     	<?php
         	require_once("api.php");
 			$db = new MySQL();
-			$start = $app->setting->get("startTime", time() + 10);
-			if ($start>time())
-				die('<center><h1><a href="index.php" style="color: #000000;">Rank not start !</a></h1></center></body></html>');
 			$time = $app->setting->get("lastCache", 0);
 			if ((time() - intval($time)) > 30)
 			{
-				$u_list = $app->user->getUserList();
-				$p_list = $db->from("Problem")->select()->fetch_all();
+                $u_list = $db->from("Record")->where("`contest`='".$_GET['cid']."'")->select('distinct user')->fetch_all();
+				$p_list = explode(',', $db->from("Contest")->where("`id`='".$_GET['cid']."'")->select("list")->fetch_one()['list']);
 				$list = array();
 				for ($i=0;$i<count($u_list);++$i)
 				{
 					$list[$i] = array(
-							'user' => $u_list[$i],
+							'user' => $u_list[$i]['user'],
 							'time' => 0,
 							'deal' => 0,
 							'do' => 0
@@ -46,24 +45,24 @@
 					for ($j=0;$j<count($p_list);++$j)
 					{
 						$yes = $db->from("Record")
-									->where("`oid`='".$p_list[$j]['id']."' AND `user`='".$u_list[$i]."' AND `result`='Accepted'")
+									->where("`contest`='".$_GET['cid']."' AND `oid`='".$p_list[$j]."' AND `user`='".$u_list[$i]['user']."' AND `result`='Accepted'")
 									->order("ASC", "time")
 									->select()
 									->fetch_one();
 						if ($yes == "")
 							$no = $db->from("Record")
-									->where("`oid`='".$p_list[$j]['id']."' AND `user`='".$u_list[$i]."' AND `result`<>'Accepted' AND `result`<>'Submit Error'")
+									->where("`contest`='".$_GET['cid']."' AND `oid`='".$p_list[$j]."' AND `user`='".$u_list[$i]['user']."' AND `result`<>'Accepted' AND `result`<>'Submit Error'")
 									->order("ASC", "time")
 									->select()
 									->num_rows();
 						else
 							$no = $db->from("Record")
-									->where("`oid`='".$p_list[$j]['id']."' AND `user`='".$u_list[$i]."' AND `result`<>'Accepted' AND `reslut`<>'Submit Error' AND `time`<".$yes['time'])
+									->where("`contest`='".$_GET['cid']."' AND `oid`='".$p_list[$j]."' AND `user`='".$u_list[$i]['user']."' AND `result`<>'Accepted' AND `reslut`<>'Submit Error' AND `time`<".$yes['time'])
 									->order("ASC", "time")
 									->select()
 									->num_rows();
 						$list[$i][$j] = array(
-								'pid' => $p_list[$j]['id'],
+								'pid' => $p_list[$j],
 								'result' => ($yes == "")?"no":"yes",
 								'time' => ($yes == "")?"0":(intval($yes['time']) - $start),
 								'wrong' => $no
@@ -105,10 +104,13 @@
 								}
 						}
 					}
-				$app->setting->set("lastArray", serialize($list));
+				$db->set(array(
+                            "rank" => serialize($list)
+                        ))->where("`id`='".$_GET['cid']."'")
+                        ->update('Contest');
 				$app->setting->set("lastCache", time());
 			} else {
-				$list = unserialize($app->setting->get("lastArray", "a:0:{}"));
+				$list = unserialize($db->from('Contest')->where("`id`='".$_GET['cid']."'")->select('rank')->fetch_one()['rank']);
 			}
 		?>
         <center>
@@ -120,7 +122,7 @@
                     	User Name
                     </td>
                     <?php
-                    	for ($i=1;$i<=$db->from("Problem")->select()->num_rows();++$i)
+                    	for ($i=1;$i<=count(explode(',', $db->from("Contest")->where("`id`='".$_GET['cid']."'")->select("list")->fetch_one()['list']));++$i)
 							echo '<td data-type="rank" align="center" width="40">'.$i.'</td>';
 					?>
                 </tr>

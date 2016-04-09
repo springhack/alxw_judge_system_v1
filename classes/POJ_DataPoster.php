@@ -1,6 +1,6 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-01-21 01:39:32
+        Last modified: 2016-04-09 21:21:36
         Filename: POJ_DataPoster.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
@@ -19,7 +19,7 @@
 		private $pass = "";
 		private $rid = "";
 		
-		public function POJ_DataPoster($user = "skvj01", $pass = "forskvj", $id = "1000", $lang = "0", $code = "")
+		public function POJ_DataPoster($user = "skvj01", $pass = "forskvj", $id = "1000", $lang = "0", $code = "", $cid = '0')
 		{
 			//MySQL
 			$this->db = new MySQL();
@@ -42,7 +42,8 @@
 					'oj' => 'POJ',
 					'oj_u' => $user,
 					'oj_p' => $pass,
-					'code' => $code
+					'code' => $code,
+					'contest' => $cid
 				))->insert("Record");
 			$_SESSION['last_id'] = $rid;	
 		}

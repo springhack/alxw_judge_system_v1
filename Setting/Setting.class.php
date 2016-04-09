@@ -1,7 +1,7 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2015-11-17 22:33:24
-        Filename: sk_vjudge/Setting/Setting.class.php
+        Last modified: 2016-04-09 20:01:25
+        Filename: Setting/Setting.class.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
 <?php

@@ -1,6 +1,6 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-02-01 12:42:08
+        Last modified: 2016-04-09 21:47:53
         Filename: manager.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
@@ -37,12 +37,6 @@
 			->insert("Problem");
 		$alert = "Problem ".$pro_info['title']." added !";
 	}
-	if (isset($_POST['time']))
-	{
-		$app->setting->set("startTime", strtotime($_POST['stime']));
-		$app->setting->set("endTime", strtotime($_POST['etime']));
-		$alert = "Start at ".$_POST['stime']." and end at ".$_POST['etime'];
-	}
 	if (isset($_POST['clean']))
 	{
 		$db = new MySQL();
@@ -75,9 +69,6 @@
                     	<h2>Add Problem</h2>
                     </td>
                     <td align="center" style="padding: 20px;">
-                    	<h2>Set Start Time</h2>
-                    </td>
-                    <td align="center" style="padding: 20px;">
                     	<h2>Clean System</h2>
                     </td>
                 </tr>
@@ -94,19 +85,8 @@
                         </form>
                     </td>
                     <td align="center" style="padding: 20px;">
-                    	<form action="manager.php" method="post"><br /><br />
-                            <label>Start Time:&nbsp;</label><input type="text" name="stime" value="<?php
-                            	echo date("Y-m-d H:i:s", $app->setting->get("startTime", time()));
-							?>" /><br /><br />
-                            <label>End Time:&nbsp;</label><input type="text" name="etime" value="<?php
-                            	echo date("Y-m-d H:i:s", $app->setting->get("endTime", time()));
-							?>" /><br /><br />
-                            <input type="submit" value="Submit" name="time" />
-                        </form>
-                    </td>
-                    <td align="center" style="padding: 20px;">
                     	<form action="manager.php" method="post">
-                        	<input type="submit" name="clean" value="一切皆忘" />
+                        	<input type="submit" name="clean" value="一切皆忘,初始化系统" />
                         </form>
                     </td>
                 </tr>
@@ -114,13 +94,13 @@
 			<table border="0" cellpadding="0" cellspacing="0">
 				<tr>
 					<td align="center" style="padding: 20px;">
+						ID
+					</td>
+					<td align="center" style="padding: 20px;">
 						Title
 					</td>
 					<td align="center" style="padding: 20px;">
 						OJ
-					</td>
-					<td align="center" style="padding: 20px;">
-						ID
 					</td>
 					<td align="center" style="padding: 20px;">
 						Origin ID
@@ -131,19 +111,21 @@
 				</tr>
 				<?php
 					$db = new MySQL();
-					$list = $db->from("Problem")->limit(10000, 0)->select()->fetch_all();
+					$sstart = isset($_GET['page'])?(intval($_GET['page'])-1)*10:0;
+					$list = $db->from("Problem")->limit(10, $sstart)->select()->fetch_all();
 					for ($i=0;$i<count($list);++$i)
 					{
 						echo "<tr>";
-						echo "<td align='center' style='padding: 20px;'>".$list[$i]['title']."</td>";
-						echo "<td align='center' style='padding: 20px;'>".$list[$i]['oj']."</td>";
-						echo "<td align='center' style='padding: 20px;'>".$list[$i]['id']."</td>";
-						echo "<td align='center' style='padding: 20px;'>".$list[$i]['pid']."</td>";
-						echo "<td align='center' style='padding: 20px;'><a href='manager.php?action=delete&id=".$list[$i]['id']."'>Delete</a></td>";
+						echo "<td align='center' style='padding: 30px;'>".$list[$i]['id']."</td>";
+						echo "<td align='center' style='padding: 30px;'>".$list[$i]['title']."</td>";
+						echo "<td align='center' style='padding: 30px;'>".$list[$i]['oj']."</td>";
+						echo "<td align='center' style='padding: 40px;'>".$list[$i]['pid']."</td>";
+						echo "<td align='center' style='padding: 40px;'><a href='manager.php?action=delete&id=".$list[$i]['id']."'>Delete</a></td>";
 						echo "</tr>";
 					}
 				?>
 			</table>
+			<script language="javascript" src="Widget/pageSwitcher/pageSwitcher.js"></script>
         </center>
     </body>
 </html>

@@ -1,7 +1,14 @@
+/**
+        Author: SpringHack - springhack@live.cn
+        Last modified: 2016-04-09 22:15:12
+        Filename: js.js
+        Description: Created by SpringHack using vim automatically.
+**/
 document.writeln('<link href="theme/default/mui-0.3.0/css/mui.min.css" rel="stylesheet" type="text/css" />\
 <script src="theme/default/mui-0.3.0/js/mui.min.js"></script>');
 $(function () {
 		$('.navigator').addClass('mui-panel mui-appbar');
+		$('.navigator.contest').addClass('mui-panel mui-appbar').css('background-color', '#137C82');
 		$('.navigator a').addClass('mui-btn mui-btn--primary');
 		$('.header a.btn').addClass('mui-btn mui-btn--accent');
 		$('.page_btn').addClass('mui-btn mui-btn--flat mui-btn--accent').removeClass('page_btn');
