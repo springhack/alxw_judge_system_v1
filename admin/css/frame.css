@@ -1,0 +1,70 @@
+/**
+        Author: SpringHack - springhack@live.cn
+        Last modified: 2016-02-01 12:26:54
+        Filename: admin/css/frame.css
+        Description: Created by SpringHack using vim automatically.
+**/
+@charset "utf-8";
+/* CSS Document */
+
+
+body, img, div, a {
+	margin: 0px;
+	border: 0px;
+	padding: 0px;
+	font-family: "Comic Sans MS", "幼圆", "黑体", sans-serif;
+	text-decoration: none;
+}
+a {
+	text-decoration: none;
+	color: #37a;
+}
+a:hover {
+	color: #FFF;
+	background-color: #37a;
+}
+select, input {
+	padding: 5px;
+	border-radius: 50px;
+}
+.page_input {
+	padding: 7px !important;
+	border-radius: 0px;
+}
+table {
+	border: 0px;
+	border-bottom: 1px #999 solid;
+	border-right: 1px #999 solid;
+	background-color: #F6FCFC;
+}
+tr:hover {
+	background-color: #D5E3E3;
+}
+td {
+	border: 1px #999 solid;
+	border-bottom: 0px;
+	border-right: 0px;
+	text-align: center;
+	word-break: break-all;
+	overflow: auto;
+}
+td:hover {
+	background-color: #BDCFD2;
+}
+
+#main {
+	padding: 50px;
+	padding-top: 20px;
+	text-align: left;
+}
+
+.xheModal {
+	top: 170px !important;
+}
+.xheModalShadow {
+	top: 170px !important;
+}
+
+.ke-dialog{
+	top: 0px !important;
+}

@@ -1,0 +1,90 @@
+/**
+        Author: SpringHack - springhack@live.cn
+        Last modified: 2016-02-01 13:10:33
+        Filename: css.css
+        Description: Created by SpringHack using vim automatically.
+**/
+body, div, img {
+	padding: 0px;
+	border: 0px;
+	margin: 0px;
+	font-family: "苹方", "Microsoft YaHei", "Comic Sans MS", "幼圆", "黑体", sans-serif;
+}
+body {
+	background-color: #252830;
+}
+table[data-type='rank'] {
+	background-color: #FFF;
+	border-radius: 3px;
+	opacity: 0.7;
+}
+h1 {
+	display: inline-block;
+	color: #FFF;
+	width: 1000px;
+}
+tr {
+	transition: all .5s;
+}
+
+.header {
+	background-color: #123;
+	height: 300px;
+	background-image: url(theme/default/logo.png);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+.navigator {
+	background-color: #000;
+	color: #FFF;
+	opacity: 0.7;
+}
+.menu {
+	padding: 5px;
+	border: 1px #434857 solid;
+	border-radius: 10px;
+	color: #fff;
+	cursor: pointer;
+}
+.menu tr {
+	border: 0px;
+	padding: 0px;
+	margin: 0px;
+}
+.menu td {
+	border: 0px;
+	padding: 2px;
+	margin: 0px;
+	border-right:  1px #434857 solid;
+	border-bottom: 1px #434857 solid;
+}
+.menu tr:hover {
+	background-color: #434857;
+}
+a {
+	color: #ffffff;
+	transition: all .5s;
+}
+a:hover {
+	color: #ffffff;
+	transition: all .5s;
+}
+a.btn{
+	display: inline-block;
+	padding: 10px;
+	border: 1px #FFF solid;
+	border-radius: 5px;
+	text-decoration: none;
+}
+a.btn:hover {
+	background-color: #FFF;
+	color: #000;
+}
+
+
+
+/**
+	Snow part
+**/
+.snowbg{width:1000px;height:600px;clear:both;margin:0 auto;position:relative;overflow:hidden;}
+.snow{position:absolute;top:0;color:#fff;}
