@@ -1,6 +1,6 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-01-31 09:42:25
+        Last modified: 2016-04-09 22:27:25
         Filename: status.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
@@ -46,7 +46,10 @@
             	require_once('api.php');
 				require_once('classes/Record.php');
 				$db = new MySQL();
-				$arr = $db->from('Record')->limit(10, $start)->order('DESC', 'time')->select('id')->fetch_all();
+				if (isset($_GET['cid']))
+					$arr = $db->from('Record')->where("`contest`='".$_GET['cid']."'")->limit(10, $start)->order('DESC', 'time')->select('id')->fetch_all();
+				else
+					$arr = $db->from('Record')->limit(10, $start)->order('DESC', 'time')->select('id')->fetch_all();
 				for ($i=0;$i<count($arr);++$i)
 				{
 					$pro = new Record($arr[$i]['id']);

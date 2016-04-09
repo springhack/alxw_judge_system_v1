@@ -56,3 +56,10 @@ Who Used the System
 发源地：
 
     沈阳航空航天大学 上线时间 2015年8月23日 
+
+部分截图：
+![image](http://blog.90its.cn/img/Index.png)
+![image](http://blog.90its.cn/img/Login.png)
+![image](http://blog.90its.cn/img/Rank.png)
+![image](http://blog.90its.cn/img/Status.png)
+![image](http://blog.90its.cn/img/Panel.png)

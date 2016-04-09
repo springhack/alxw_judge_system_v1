@@ -1,6 +1,6 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-04-09 22:03:02
+        Last modified: 2016-04-09 22:34:13
         Filename: rank.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
@@ -33,6 +33,7 @@
 			{
                 $u_list = $db->from("Record")->where("`contest`='".$_GET['cid']."'")->select('distinct user')->fetch_all();
 				$p_list = explode(',', $db->from("Contest")->where("`id`='".$_GET['cid']."'")->select("list")->fetch_one()['list']);
+				$start = $db->from("Contest")->where("`id`='".$_GET['cid']."'")->select("time_s")->fetch_one()['time_s'];
 				$list = array();
 				for ($i=0;$i<count($u_list);++$i)
 				{
