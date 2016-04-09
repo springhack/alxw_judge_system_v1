@@ -1,5 +1,5 @@
-document.writeln('<link href="theme/material design/mui-0.3.0/css/mui.min.css" rel="stylesheet" type="text/css" />\
-<script src="theme/material design/mui-0.3.0/js/mui.min.js"></script>');
+document.writeln('<link href="theme/default/mui-0.3.0/css/mui.min.css" rel="stylesheet" type="text/css" />\
+<script src="theme/default/mui-0.3.0/js/mui.min.js"></script>');
 $(function () {
 		$('.navigator').addClass('mui-panel mui-appbar');
 		$('.navigator a').addClass('mui-btn mui-btn--primary');
