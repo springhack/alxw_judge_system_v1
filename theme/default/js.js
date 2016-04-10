@@ -1,6 +1,6 @@
 /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-04-09 22:15:12
+        Last modified: 2016-04-10 17:24:23
         Filename: js.js
         Description: Created by SpringHack using vim automatically.
 **/
@@ -10,6 +10,7 @@ $(function () {
 		$('.navigator').addClass('mui-panel mui-appbar');
 		$('.navigator.contest').addClass('mui-panel mui-appbar').css('background-color', '#137C82');
 		$('.navigator a').addClass('mui-btn mui-btn--primary');
+		$('.navigator.contest a').addClass('mui-btn mui-btn--primary').css('background-color', '#137C82');
 		$('.header a.btn').addClass('mui-btn mui-btn--accent');
 		$('.page_btn').addClass('mui-btn mui-btn--flat mui-btn--accent').removeClass('page_btn');
 		$('.page_input').addClass('mui-btn mui-btn--flat mui-btn--accent').removeClass('page_input');
@@ -26,5 +27,6 @@ $(function () {
 				'top' : '20px',
 				'position' : 'relative'
 			});
+		$('center:first input[type=password]').addClass('mui-btn mui-btn--flat mui-btn--accent');
 		$(document.body).css('background-color', '#DDD').append('<center><a href="http://www.90its.cn/" target="_blank"><br />Design By SpringHack</a><br /><br /></center>');
 	});

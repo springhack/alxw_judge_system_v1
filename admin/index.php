@@ -1,6 +1,6 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-04-09 20:39:04
+        Last modified: 2016-04-10 17:56:16
         Filename: index.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
@@ -49,17 +49,17 @@
             </div>
             <div id="right">
                 <div id="left">
+                	<div class="item_parent selected" onclick="menu.open('main.php')">
+                        <img src="img/dash.svg" />监控面板
+                    </div>
                 	<div class="item_parent" onclick="menu.open('../manager.php')">
-                        <img src="img/dash.svg" />评测管理
+                        <img src="img/dash.svg" />题目管理
                     </div>
                 	<div class="item_parent" onclick="menu.open('../contest_edit.php')">
                         <img src="img/dash.svg" />比赛管理
                     </div>
                 	<div class="item_parent" onclick="menu.open('../theme.php')">
                         <img src="img/dash.svg" />主题管理
-                    </div>
-                	<div class="item_parent selected" onclick="menu.open('main.php')">
-                        <img src="img/dash.svg" />监控面板
                     </div>
                     <div class="item_parent" onclick="menu.toggle('#eassy')">
                         <img src="img/eassy.svg" />文章管理&nbsp;&nbsp;&nbsp;<font style="font-size: 15px;">∨</font>

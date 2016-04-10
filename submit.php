@@ -1,6 +1,6 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-04-09 22:31:07
+        Last modified: 2016-04-10 17:14:02
         Filename: submit.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
@@ -9,22 +9,32 @@
 	if (!$app->user->isLogin())
 		die('<center><a href=\'admin/status.php?action=login&url=../index.php\'>Please login or register first!</a></center>');
 	require_once("classes/Problem.php");
-	/**
-	$start = $app->setting->get("startTime", time() + 10);
-	if ($start>time())
-		die('<center><h1><a href="index.php" style="color: #000000;">Contest not start !</a></h1></center></body></html>');
-	$end = $app->setting->get("endTime", time() + 10);
-	if ($end<time())
-		die('<center><h1><a href="index.php" style="color: #000000;">Contest have finished !</a></h1></center></body></html>');
-	**/
 	$db = new MySQL();
 	if (isset($_GET['cid']))
 	{
+		$res = $db->from('Contest')->where("`id`='".intval($_GET['cid'])."'")->select()->fetch_one();
+		if (!$res)
+		{
+			die('<center><h1><a href="index.php" style="color: #000000;">No such contest !</a></h1></center>');
+		}
+		@session_start();
+		if (!empty($res['password']) && $res['password'] != $_SESSION['contest_'.intval($_GET['cid'])])
+		{
+			header('Location: password.php?cid='.intval($_GET['cid']));
+			die();
+		}
 		$res = $db->from('Contest')->where("`id`='".intval($_GET['cid'])."'")->select()->fetch_one();
 		if ($res['time_s'] > time())
 			die('<center><h1><a href="index.php" style="color: #000000;">Contest not start !</a></h1></center></body></html>');
 		if ($res['time_e'] < time())
 			die('<center><h1><a href="index.php" style="color: #000000;">Contest finished !</a></h1></center></body></html>');
+		$list = explode(',', $res['list']);
+		if (!in_array(intval($_GET['id']), $list))
+			die('<center><h1><a href="index.php" style="color: #000000;">No such problem or permission denied !</a></h1></center></body></html>');
+	} else {
+		$res = $db->from('Problem')->where("`id`='".intval($_GET['id'])."'")->select('hide')->fetch_one();
+		if ($res['hide'] == 'yes')
+			die('<center><h1><a href="index.php" style="color: #000000;">No such problem or permission denied !</a></h1></center></body></html>');
 	}
 	$info = $db->from("Problem")->where("`id` = '".$_GET['id']."'")->select()->fetch_one();
 	$pro = new Problem($info['pid'], $info['oj']);

@@ -1,6 +1,6 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-04-09 22:13:46
+        Last modified: 2016-04-10 17:40:12
         Filename: header.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
@@ -9,7 +9,17 @@
 			<link rel="stylesheet" href="resource.php?type=css" type="text/css" />
 			<div class='header'>
 				<div class='navigator<?php echo isset($_GET['cid'])?' contest':''; ?>'>
-						<h2 style='display: inline-block;'>Virtual Judge</h2><font style='display: inline-block; width: 220px;'>&nbsp;</font>
+						<h2 style='display: inline-block;'><?php
+							if (isset($_GET['cid']))
+							{
+								require_once('api.php');
+								$db = new MySQL();
+								$res = $db->from('Contest')->where("`id`='".intval($_GET['cid'])."'")->select('title')->fetch_one();
+								echo '比赛：'.$res['title'];
+							} else {
+								echo 'Virtual Judge';
+							}
+						?></h2><font style='display: inline-block; width: 220px;'>&nbsp;</font>
                     	<a href="index.php">首页</a><font style='display: inline-block; width: 40px;'>&nbsp;</font>
 						<?php if (!isset($_GET['cid'])) { ?>
                     	<a href="contest.php">比赛</a><font style='display: inline-block; width: 40px;'>&nbsp;</font>

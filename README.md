@@ -35,6 +35,11 @@ Linux新手请看鸟哥的私房菜http://vbird.dic.ksu.edu.tw/linux_basic/linux
 
 最新更新
 
+    添加多比赛密码支持
+    删除题目自动删除相关比赛
+    默认主题优化
+    题目隐藏功能
+    增加稳定性
     添加多比赛支持
     更改默认主题为Material Design
     更新判题逻辑部分代码

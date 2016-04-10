@@ -1,6 +1,6 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-04-09 20:40:56
+        Last modified: 2016-04-10 17:52:49
         Filename: contest.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
@@ -27,11 +27,12 @@
 						'time_s' => 'text',
 						'time_e' => 'text',
 						'password' => 'text',
-						'rank' => 'text'
+						'rank' => 'text',
+						'time' => 'text'
 					))->create("Contest");
 			}
-			$list = $db->from("Contest")->limit(10, $sstart)->select()->fetch_all();
-			echo "<table border='1'><tr><td width='100'>Problem ID</td><td width='200'>Problem Title</td><td width='150'>Start Time</td><td width='150'>End Time</td></tr>";
+			$list = $db->from("Contest")->limit(10, $sstart)->order('desc', 'time')->select()->fetch_all();
+			echo "<table border='1'><tr><td width='100'>Problem ID</td><td width='200'>Problem Title</td><td width='200'>Start Time</td><td width='200'>End Time</td></tr>";
 			for ($i=0;$i<count($list);++$i)
 				echo "<tr><td width='100'>".$list[$i]['id']."</td><td width='200'><a href='index.php?cid=".$list[$i]['id']."'>".$list[$i]['title']."</a></td><td>".date('Y-m-d H:i:s', $list[$i]['time_s'])."</td><td>".date('Y-m-d H:i:s', $list[$i]['time_e'])."</td></tr>";
 			echo "</table>";

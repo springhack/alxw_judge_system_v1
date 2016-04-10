@@ -1,6 +1,6 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-04-09 21:47:53
+        Last modified: 2016-04-10 17:56:03
         Filename: manager.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
@@ -16,6 +16,18 @@
 		{
 			$db = new MySQL();
 			$db->from("Problem")->where("`id`='".intval($_GET['id'])."'")->delete();
+			$db->from("Contest")->where("`list` like '%".intval($_GET['id'])."%'")->delete();
+		}
+		if ($_GET['action'] == "trigger")
+		{
+			$db = new MySQL();
+			$hide = $db->from("Problem")->where("`id`='".intval($_GET['id'])."'")->select('hide')->fetch_one();
+			if ($hide['hide'] == 'yes')
+			{
+				$db->set(array('hide' => 'no'))->where("`id`='".intval($_GET['id'])."'")->update('Problem');
+			} else {
+				$db->set(array('hide' => 'yes'))->where("`id`='".intval($_GET['id'])."'")->update('Problem');
+			}
 		}
 	}
 	if (isset($_POST['submit']))
@@ -32,7 +44,8 @@
 				'id' => intval($num['max(cast(id as signed))']) + 1,
 				'pid' => $_POST['pid'],
 				'title' => get_magic_quotes_gpc()?$pro_info['title']:addslashes($pro_info['title']),
-				'oj' => $_POST['oj']
+				'oj' => $_POST['oj'],
+				'hide' => 'no'
 			))
 			->insert("Problem");
 		$alert = "Problem ".$pro_info['title']." added !";
@@ -42,6 +55,7 @@
 		$db = new MySQL();
 		$db->from("Problem")->delete();
 		$db->from("Record")->delete();
+		$db->from("Contest")->delete();
 		$app->setting->set("lastArray", "a:0:{}");
 		$app->setting->set("lastCache", time());
 		$app->setting->set("startTime", time());
@@ -53,7 +67,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>评测管理</title>
+        <title>题目管理</title>
         <link rel="stylesheet" href="admin/css/frame.css" type="text/css" />
     </head>
     <body>
@@ -65,15 +79,15 @@
 			?>
 			<table border="0" cellpadding="0" cellspacing="0">
             	<tr>
-                	<td align="center" style="padding: 20px;">
+                	<td align="center" style="padding: 10px;">
                     	<h2>Add Problem</h2>
                     </td>
-                    <td align="center" style="padding: 20px;">
+                    <td align="center" style="padding: 10px;">
                     	<h2>Clean System</h2>
                     </td>
                 </tr>
                 <tr>
-                    <td align="center" style="padding: 20px;">
+                    <td align="center" style="padding: 10px;">
                     	<form action="manager.php" method="post"><br /><br />
                             <label>Problem ID:&nbsp;</label><input type="text" name="pid" /><br /><br />
                             <label>Problem OJ:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
@@ -84,7 +98,7 @@
                             <input type="submit" value="Submit" name="submit" />
                         </form>
                     </td>
-                    <td align="center" style="padding: 20px;">
+                    <td align="center" style="padding: 10px;">
                     	<form action="manager.php" method="post">
                         	<input type="submit" name="clean" value="一切皆忘,初始化系统" />
                         </form>
@@ -93,19 +107,19 @@
             </table><br /><br />
 			<table border="0" cellpadding="0" cellspacing="0">
 				<tr>
-					<td align="center" style="padding: 20px;">
+					<td align="center" style="width: 50px;">
 						ID
 					</td>
-					<td align="center" style="padding: 20px;">
+					<td align="center" style="width: 200px;">
 						Title
 					</td>
-					<td align="center" style="padding: 20px;">
+					<td align="center" style="width: 100px;">
 						OJ
 					</td>
-					<td align="center" style="padding: 20px;">
-						Origin ID
+					<td align="center" style="width: 100px;">
+						Remote ID
 					</td>
-					<td align="center" style="padding: 20px;">
+					<td align="center" style="width: 200px;">
 						Operation
 					</td>
 				</tr>
@@ -116,11 +130,15 @@
 					for ($i=0;$i<count($list);++$i)
 					{
 						echo "<tr>";
-						echo "<td align='center' style='padding: 30px;'>".$list[$i]['id']."</td>";
-						echo "<td align='center' style='padding: 30px;'>".$list[$i]['title']."</td>";
-						echo "<td align='center' style='padding: 30px;'>".$list[$i]['oj']."</td>";
-						echo "<td align='center' style='padding: 40px;'>".$list[$i]['pid']."</td>";
-						echo "<td align='center' style='padding: 40px;'><a href='manager.php?action=delete&id=".$list[$i]['id']."'>Delete</a></td>";
+						echo "<td align='center' style='padding: 10px;'>".$list[$i]['id']."</td>";
+						echo "<td align='center' style='padding: 10px;'>".$list[$i]['title']."</td>";
+						echo "<td align='center' style='padding: 10px;'>".$list[$i]['oj']."</td>";
+						echo "<td align='center' style='padding: 10px;'>".$list[$i]['pid']."</td>";
+						echo "<td align='center' style='padding: 10px;'>
+							<a href='manager.php?action=delete&id=".$list[$i]['id']."'>Delete</a>
+							&nbsp;|&nbsp;
+							<a href='manager.php?action=trigger&id=".$list[$i]['id']."'>".(($list[$i]['hide'] == 'no')?'Hide':'<font style="color: red;">Show</font>')."</a>
+							</td>";
 						echo "</tr>";
 					}
 				?>

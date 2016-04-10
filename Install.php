@@ -1,6 +1,6 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-04-09 15:25:50
+        Last modified: 2016-04-10 16:44:57
         Filename: Install.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
@@ -15,5 +15,5 @@
 	$app->user = new User();
 	$app->user->userRegister($Config['AUTO_USER'], $Config['AUTO_PASS'], "", 0);
 	@file_put_contents(".install", "Cello Studio");
-	die("<center>Install finished.<br /><a href='index.php'>Goto Index</a></center>");
+	die("<center>Step one finished.<br /><a href='index.php' target='_blank'>Click here to step 2</a><br /><a href='contest.php' target='_blank'>Click here to step 3</a></center>");
 ?>

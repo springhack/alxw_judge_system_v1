@@ -1,6 +1,6 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-04-09 21:14:17
+        Last modified: 2016-04-10 17:04:09
         Filename: index.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
@@ -9,6 +9,22 @@
 	{
 		header('Location: Install.php');
 		die();
+	}
+	require_once('api.php');
+	$db = new MySQL();
+	if (isset($_GET['cid']))
+	{
+		$res = $db->from('Contest')->where("`id`='".intval($_GET['cid'])."'")->select()->fetch_one();
+		if (!$res)
+		{
+			die('<center><h1><a href="index.php" style="color: #000000;">No such contest !</a></h1></center>');
+		}
+		@session_start();
+		if (!empty($res['password']) && $res['password'] != $_SESSION['contest_'.intval($_GET['cid'])])
+		{
+			header('Location: password.php?cid='.intval($_GET['cid']));
+			die();
+		}
 	}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -24,14 +40,14 @@
     	<?php
 			$sstart = isset($_GET['page'])?(intval($_GET['page'])-1)*10:0;
 			require_once("api.php");
-			$db = new MySQL();
 			if ($db->query("SHOW TABLES LIKE 'Problem'")->num_rows() != 1)
 			{
 				$db->struct(array(
 						'id' => 'text',
 						'pid' => 'text',
 						'title' => 'text',
-						'oj' => 'text'
+						'oj' => 'text',
+						'hide' => 'text'
 					))->create("Problem");
 			}
 			echo "<table border='1'><tr><td width='100'>Problem ID</td><td width='500'>Problem Title</td></tr>";
@@ -47,7 +63,7 @@
 					echo "<tr><td width='100'>".(intval($i)+1)."</td><td width='500'><a href='view.php?cid=".$_GET['cid']."&id=".$list['id']."'>".$list['title']."</a></td></tr>";
 				}
 			} else {
-				$list = $db->from("Problem")->limit(10, $sstart)->select()->fetch_all();
+				$list = $db->from("Problem")->where("`hide`='no'")->limit(10, $sstart)->select()->fetch_all();
 				for ($i=0;$i<count($list);++$i)
 					echo "<tr><td width='100'>".$list[$i]['id']."</td><td width='500'><a href='view.php?id=".$list[$i]['id']."'>".$list[$i]['title']."</a></td></tr>";
 			}

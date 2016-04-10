@@ -1,9 +1,27 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-04-09 21:31:11
+        Last modified: 2016-04-10 17:11:47
         Filename: view.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
+<?php
+	require_once('api.php');
+	$db = new MySQL();
+	if (isset($_GET['cid']))
+	{
+		$res = $db->from('Contest')->where("`id`='".intval($_GET['cid'])."'")->select()->fetch_one();
+		if (!$res)
+		{
+			die('<center><h1><a href="index.php" style="color: #000000;">No such contest !</a></h1></center>');
+		}
+		@session_start();
+		if (!empty($res['password']) && $res['password'] != $_SESSION['contest_'.intval($_GET['cid'])])
+		{
+			header('Location: password.php?cid='.intval($_GET['cid']));
+			die();
+		}
+	}
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
@@ -14,13 +32,18 @@
     	<center>
         <?php require_once("header.php"); ?>
 		<?php
-        	require_once("api.php");
-            $db = new MySQL();
 			if (isset($_GET['cid']))
 			{
 				$res = $db->from('Contest')->where("`id`='".intval($_GET['cid'])."'")->select()->fetch_one();
 				if ($res['time_s'] > time())
 					die('<center><h1><a href="index.php" style="color: #000000;">Contest not start !</a></h1></center></body></html>');
+				$list = explode(',', $res['list']);
+				if (!in_array(intval($_GET['id']), $list))
+					die('<center><h1><a href="index.php" style="color: #000000;">No such problem or permission denied !</a></h1></center></body></html>');
+			} else {
+				$res = $db->from('Problem')->where("`id`='".intval($_GET['id'])."'")->select('hide')->fetch_one();
+				if ($res['hide'] == 'yes')
+					die('<center><h1><a href="index.php" style="color: #000000;">No such problem or permission denied !</a></h1></center></body></html>');
 			}
 		?>
         <h1>View Problem</h1>

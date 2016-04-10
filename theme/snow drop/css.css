@@ -1,6 +1,6 @@
 /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-02-01 13:10:33
+        Last modified: 2016-04-10 17:29:17
         Filename: css.css
         Description: Created by SpringHack using vim automatically.
 **/
@@ -30,7 +30,7 @@ tr {
 .header {
 	background-color: #123;
 	height: 300px;
-	background-image: url(theme/default/logo.png);
+	background-image: url('theme/snow drop/logo.png');
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
 }

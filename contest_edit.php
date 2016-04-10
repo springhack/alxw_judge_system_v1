@@ -1,6 +1,6 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-04-09 21:48:12
+        Last modified: 2016-04-10 17:54:28
         Filename: contest_edit.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
@@ -35,7 +35,8 @@
 					'password' => get_magic_quotes_gpc()?$_POST['password']:addslashes($_POST['password']),
 					'time_s' => strtotime($_POST['time_s']),
 					'time_e' => strtotime($_POST['time_e']),
-					'rank' => 'a:0:{}'
+					'rank' => 'a:0:{}',
+					'time' => time()
 					))->insert("Contest");
 			}
 		}
@@ -50,13 +51,13 @@
     </head>
     <body>
 		<center>
-        	<br /><br />
+        	<br />
 			<table border="0" cellpadding="0" cellspacing="0">
 				<tr>
 					<td>添加/编辑比赛</td>
 				</tr>
 				<tr>
-					<td align='center' style='padding: 20px;'>
+					<td align='center' style='padding: 10px;'>
 						<form action='contest_edit.php' method='post'>
 							比赛ID:<input type='text' id='id' name='id' readonly /><br /><br />
 							比赛标题:<input type='text' id='title' name='title' /><br /><br />
@@ -71,19 +72,19 @@
 			</table><br />
 			<table border="0" cellpadding="0" cellspacing="0">
 				<tr>
-					<td align="center" style="padding: 30px;">
+					<td align="center" style="width: 100px;padding: 3px;">
 						ID
 					</td>
-					<td align="center" style="padding: 30px;">
+					<td align="center" style="width: 100px;padding: 3px;">
 						Title
 					</td>
-					<td align="center" style="padding: 50px;">
+					<td align="center" style="width: 200px;padding: 3px;">
 						Start Time
 					</td>
-					<td align="center" style="padding: 50px;">
+					<td align="center" style="width: 200px;padding: 3px;">
 						End Time
 					</td>
-					<td align="center" style="padding: 40px;">
+					<td align="center" style="width: 100px;padding: 3px;">
 						Operation
 					</td>
 				</tr>
@@ -102,7 +103,7 @@
 				<?php
 					$db = new MySQL();
 					$sstart = isset($_GET['page'])?(intval($_GET['page'])-1)*10:0;
-					$list = $db->from("Contest")->limit(10, $sstart)->select()->fetch_all();
+					$list = $db->from("Contest")->limit(10, $sstart)->order('desc', 'time')->select()->fetch_all();
 					for ($i=0;$i<count($list);++$i)
 					{
 						echo "
@@ -117,11 +118,11 @@
 							</script>
 							";
 						echo "<tr>";
-						echo "<td align='center' style='padding: 30px;'>".$list[$i]['id']."</td>";
-						echo "<td align='center' style='padding: 30px;'>".$list[$i]['title']."</td>";
-						echo "<td align='center' style='padding: 50px;'>".date('Y-m-d H:i:s', $list[$i]['time_s'])."</td>";
-						echo "<td align='center' style='padding: 50px;'>".date('Y-m-d H:i:s', $list[$i]['time_e'])."</td>";
-						echo "<td align='center' style='padding: 40px;'><a href='javascript:edit(".$list[$i]['id'].");'>Edit</a></td>";
+						echo "<td align='center' >".$list[$i]['id']."</td>";
+						echo "<td align='center' >".$list[$i]['title']."</td>";
+						echo "<td align='center' >".date('Y-m-d H:i:s', $list[$i]['time_s'])."</td>";
+						echo "<td align='center' >".date('Y-m-d H:i:s', $list[$i]['time_e'])."</td>";
+						echo "<td align='center' ><a href='javascript:edit(".$list[$i]['id'].");'>Edit</a></td>";
 						echo "</tr>";
 					}
 				?>
