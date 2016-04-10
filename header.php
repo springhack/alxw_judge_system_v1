@@ -1,6 +1,6 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-04-10 17:40:12
+        Last modified: 2016-04-10 21:42:32
         Filename: header.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
@@ -10,16 +10,18 @@
 			<div class='header'>
 				<div class='navigator<?php echo isset($_GET['cid'])?' contest':''; ?>'>
 						<h2 style='display: inline-block;'><?php
+                        	require_once("api.php");
 							if (isset($_GET['cid']))
 							{
-								require_once('api.php');
 								$db = new MySQL();
 								$res = $db->from('Contest')->where("`id`='".intval($_GET['cid'])."'")->select('title')->fetch_one();
 								echo '比赛：'.$res['title'];
+								echo '</h2><br />';
 							} else {
-								echo 'Virtual Judge';
+								echo $app->setting->get('SiteName', 'Virtual Judge');
+								echo '</h2><font style=\'display: inline-block; width: 100px;\'>&nbsp;</font>';
 							}
-						?></h2><font style='display: inline-block; width: 220px;'>&nbsp;</font>
+						?>
                     	<a href="index.php">首页</a><font style='display: inline-block; width: 40px;'>&nbsp;</font>
 						<?php if (!isset($_GET['cid'])) { ?>
                     	<a href="contest.php">比赛</a><font style='display: inline-block; width: 40px;'>&nbsp;</font>
@@ -30,7 +32,6 @@
                     	<a href="status.php<?php echo isset($_GET['cid'])?'?cid='.$_GET['cid']:''; ?>">状态</a><font style='display: inline-block; width: 40px;'>&nbsp;</font>
 						<?php } ?>
                     	<?php
-                        	require_once("api.php");
 							if ($app->user->isLogin())
 								echo '<font style="display: inline-block; padding: 5px; border-radius: 5px;">'.$app->user->getUser().'</font> => <a href="admin/status.php?action=logout&url=../index.php">登出</a>';
 							else
