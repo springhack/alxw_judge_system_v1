@@ -1,6 +1,6 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-01-31 10:07:31
+        Last modified: 2016-04-11 11:36:07
         Filename: status.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
@@ -52,6 +52,11 @@
 		case "login":
 			if (isset($_POST['submit']))
 			{
+				if (!$user->user_pass_check($_POST['user'], $_POST['pass']))
+				{
+					$alert = "登录失败，账号密码不符合要求";
+					break;
+				}
 				if ($user->userLogin($_POST['user'], $_POST['pass']))
 				{
 					$alert = "登录成功,3秒后返回!";

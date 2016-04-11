@@ -1,6 +1,6 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-04-10 17:54:28
+        Last modified: 2016-04-11 11:43:32
         Filename: contest_edit.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
@@ -75,7 +75,7 @@
 					<td align="center" style="width: 100px;padding: 3px;">
 						ID
 					</td>
-					<td align="center" style="width: 100px;padding: 3px;">
+					<td align="center" style="min-width: 100px;padding: 3px;">
 						Title
 					</td>
 					<td align="center" style="width: 200px;padding: 3px;">

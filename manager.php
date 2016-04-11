@@ -1,6 +1,6 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-04-10 17:56:03
+        Last modified: 2016-04-11 11:43:07
         Filename: manager.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
@@ -110,7 +110,7 @@
 					<td align="center" style="width: 50px;">
 						ID
 					</td>
-					<td align="center" style="width: 200px;">
+					<td align="center" style="min-width: 200px;">
 						Title
 					</td>
 					<td align="center" style="width: 100px;">

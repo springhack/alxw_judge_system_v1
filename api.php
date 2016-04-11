@@ -1,7 +1,7 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-01-21 01:05:40
-        Filename: ../api.php
+        Last modified: 2016-04-11 11:38:33
+        Filename: api.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
 <?php
@@ -14,4 +14,6 @@
 	$app->tools = new Tools();
 	$app->setting = new Setting();
 	$app->tools->dealSiteOpen();
+	if (isset($_GET['cid']))
+		$_GET['cid'] = intval($_GET['cid']);
 ?>
