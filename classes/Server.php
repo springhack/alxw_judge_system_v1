@@ -1,11 +1,11 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-04-09 19:22:30
+        Last modified: 2016-04-14 17:52:02
         Filename: Server.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
 <?php
-	require_once('Config.php');
+	require_once('../Config.Daemon.php');
 	$pid = array();
 	foreach ($conf['OJ_LIST'] as $oj)
 	{

@@ -16,11 +16,12 @@ PS: GPL保证你可以合法忽略以上注意事项但不能保证你不受鄙�
 
     快速安装指南：
     1、安装Ubuntu
-    2、执行如下命令
+    2、执行如下命令(vim以开启apache2的mod_rewrite)
         sudo apt-get update
         sudo apt-get install git apache2 mysql-server php5 php5-curl
         sudo a2enmod rewrite
         service apache2 restart
+		vim /etc/apache2/apache2.conf
         sudo git clone https://github.com/springhack/alxwvj.git /var/www/html/alxwvj
         cd /var/www/html/alxwvj
         sudo nohup php classes/Server.php &
@@ -35,6 +36,8 @@ Linux新手请看鸟哥的私房菜http://vbird.dic.ksu.edu.tw/linux_basic/linux
 
 最新更新
 
+    修复路径问题导致的图片不显示
+    移动守护进程配置文件到Web根目录, Config.Daemon.php
     添加多比赛密码支持
     删除题目自动删除相关比赛
     默认主题优化
@@ -50,6 +53,7 @@ Linux新手请看鸟哥的私房菜http://vbird.dic.ksu.edu.tw/linux_basic/linux
 AlxwVJ特性
 
     开源 全部采用开源技术，不仅仅是提供源代码，搭建AlxwVJ不需要购买任何商业软件。
+    支持Lo-runner后端，混合vj与oj，单独立项。
     采用成熟的Linux系统平台，通过目录锁定和用户锁定避免恶意答案损害系统。
     可以将Web服务器、数据库服务器、判题服务器分机架设，支持多台判题服务器同时工作。
     管理员可以完全通过Web平台添加题目，包括测试数据也可以同时添加。
