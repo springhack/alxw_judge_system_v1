@@ -1,6 +1,6 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-04-11 11:43:07
+        Last modified: 2016-04-14 12:41:55
         Filename: manager.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
@@ -92,8 +92,11 @@
                             <label>Problem ID:&nbsp;</label><input type="text" name="pid" /><br /><br />
                             <label>Problem OJ:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                             <select name="oj">
-                                <option value="POJ">POJ</option>
-                                <option value="HDOJ">HDOJ</option>
+								<?php
+									require_once('classes/Config.php');
+									for ($i=0;$i<count($conf['OJ_LIST']);++$i)
+										echo '<option value="'.$conf['OJ_LIST'][$i].'">'.$conf['OJ_LIST'][$i].'</option>';
+								?>
                             </select><br /><br />
                             <input type="submit" value="Submit" name="submit" />
                         </form>
