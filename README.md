@@ -18,14 +18,14 @@ PS: GPL保证你可以合法忽略以上注意事项但不能保证你不受鄙�
     1、安装Ubuntu
     2、执行如下命令(vim以开启apache2的mod_rewrite)
         sudo apt-get update
-        sudo apt-get install git apache2 mysql-server php5 php5-curl
+        sudo apt-get install git apache2 mysql-server php5 php5-curl php5-mysql
         sudo a2enmod rewrite
         service apache2 restart
 		vim /etc/apache2/apache2.conf
         sudo git clone https://github.com/springhack/alxwvj.git /var/www/html/alxwvj
         cd /var/www/html/alxwvj
         sudo nohup php classes/Server.php &
-    3、安装后访问服务器80端口上的Web服务alxwvj目录
+    3、安装后访问服务器80端口上的Web服务alxwvj目录进行初始化安装
         例如 w3m http://localhost/alxwvj
         
 使用上需要帮助，请访问我的博客或联系我的邮箱。
@@ -36,6 +36,7 @@ Linux新手请看鸟哥的私房菜http://vbird.dic.ksu.edu.tw/linux_basic/linux
 
 最新更新
 
+    修复不在classes目录不能启动的问题
     修复路径问题导致的图片不显示
     移动守护进程配置文件到Web根目录, Config.Daemon.php
     添加多比赛密码支持
