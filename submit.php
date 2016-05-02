@@ -1,6 +1,6 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-04-10 17:14:02
+        Last modified: 2016-05-02 23:20:19
         Filename: submit.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
@@ -12,6 +12,8 @@
 	$db = new MySQL();
 	if (isset($_GET['cid']))
 	{
+		if (!is_numeric($_GET['cid']))
+			die('<center><h1><a href="index.php" style="color: #000000;">Please don\'t try this again !</a></h1></center>');
 		$res = $db->from('Contest')->where("`id`='".intval($_GET['cid'])."'")->select()->fetch_one();
 		if (!$res)
 		{
@@ -40,6 +42,8 @@
 	$pro = new Problem($info['pid'], $info['oj']);
 	if (isset($_POST['lang']) && isset($_POST['code']))
 	{
+		if (!is_numeric($_GET['id']) || !is_numeric($_POST['lang']))
+			die('<center><h1><a href="index.php" style="color: #000000;">Please don\'t try this again !</a></h1></center>');
 		if (isset($_SESSION['lasttime']))
 		{
 			if (time() - intval($_SESSION['lasttime']) < 10)

@@ -1,12 +1,12 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-04-16 09:57:19
+        Last modified: 2016-05-02 23:03:59
         Filename: POJ_Server.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
 <?php
 
-	define('DEBUG', true);
+	define('DEBUG', false);
 
 	require_once(dirname(__FILE__)."/../App.class.php");
 	require_once(dirname(__FILE__)."/POJ_Record.php");
