@@ -1,21 +1,23 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2015-12-10 14:26:56
-        Filename: result.php
+        Last modified: 2016-05-02 19:33:51
+        Filename: ../result.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<meta http-equiv="refresh" content="3" />
+		<!--<meta http-equiv="refresh" content="3" />-->
         <title>Status List</title>
+		<script language'javascript' src='javascript/progress.js'></script>
     </head>
     <body>
     	<center>
         <?php require_once("header.php"); ?>
         <h1>Problem Status List</h1>
 		<?php if (!isset($_GET['id'])) die('<center><h2>非法操作!</h2></center>'); ?>
+		<div id='progress'><div id='now'></div></div>
     	<table border="1">
         	<tr>
             	<td>
@@ -85,6 +87,11 @@
         </table>
         <br /><br />
 		<script language="javascript" src="Widget/pageSwitcher/pageSwitcher.js"></script>
+		<script language='javascript'>
+			$(function () {
+					window.follow_progress();
+				});
+		</script>
 		<br /><br />
         </center>
     </body>

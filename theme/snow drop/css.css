@@ -1,6 +1,6 @@
 /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-04-10 17:29:17
+        Last modified: 2016-05-02 20:29:16
         Filename: css.css
         Description: Created by SpringHack using vim automatically.
 **/
@@ -79,6 +79,18 @@ a.btn{
 a.btn:hover {
 	background-color: #FFF;
 	color: #000;
+}
+#progress {
+	width: 100%;
+   	height: 5px;
+	border-radius: 2px;
+	border: 1px solid #AAA;
+	text-align: left;
+}
+#now {
+	width: 0px;
+   	height: 5px;
+	background-color: #55FF55;
 }
 
 

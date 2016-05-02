@@ -1,7 +1,7 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-02-01 12:35:12
-        Filename: resource.php
+        Last modified: 2016-05-02 19:24:37
+        Filename: ../resource.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
 <?php

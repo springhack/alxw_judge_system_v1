@@ -13,3 +13,15 @@ body, div, img {
 .navigator a {
 	color: #FFF;
 }
+#progress {
+	width: 100%;
+	height: 5px;
+	border-radius: 2px;
+	border: 1px solid #AAA;
+	text-align: left;
+}
+#now {
+	width: 0px;
+	height: 5px;
+	background-color: #55FF55;
+}
