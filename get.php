@@ -7,8 +7,10 @@
 <?php
  	require_once("api.php");
 	require_once("classes/Problem.php");
-	$id = explode("id=", $_SERVER["HTTP_REFERER"]);
-	$id = isset($id[1])?$id[1]:0;
+	preg_match('/[^c]id=(\d*)/', $_SERVER["HTTP_REFERER"], $match);
+	$id = $match[1];
+	file_put_contents('log.txt', $id);
+	$id = is_numeric($id)?$id:0;
 	$db = new MySQL();
 	$info = $db->from("Problem")->where("`id` = '".$id."'")->select()->fetch_one();
 	$prefix = "";
