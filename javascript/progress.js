@@ -1,6 +1,6 @@
 /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-05-02 19:26:57
+        Last modified: 2016-05-04 18:49:17
         Filename: progress.js
         Description: Created by SpringHack using vim automatically.
 **/
@@ -12,7 +12,7 @@
 		var p = $('#progress');
 		var n = $('#now');
 		var t = $('table:last tr:last td');
-		var id = /id=(.*)[&]{0,}/.exec(location.href)[1];
+		var id = /id=([\da-zA-Z]*)[&]{0,}/.exec(location.href)[1];
 		var count = p.width();
 		var cb = function () {
 			$.get('getJSON.php', {

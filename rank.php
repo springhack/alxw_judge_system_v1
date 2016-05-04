@@ -1,6 +1,6 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-04-10 17:38:44
+        Last modified: 2016-05-04 18:32:50
         Filename: rank.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
@@ -28,7 +28,9 @@
     	<?php
         	require_once("api.php");
 			$db = new MySQL();
-			$time = $app->setting->get("lastCache", 0);
+			$res_t = $db->from('Contest')->where("`id`='".$_GET['cid']."'")->select('cache,rank')->fetch_one();
+			$time = intval($res_t['cache']);
+			$list = unserialize($res_t['rank']);
 			if ((time() - intval($time)) > 30)
 			{
                 $u_list = $db->from("Record")->where("`contest`='".$_GET['cid']."'")->select('distinct user')->fetch_all();
@@ -106,12 +108,10 @@
 						}
 					}
 				$db->set(array(
-                            "rank" => serialize($list)
+                            'rank' => serialize($list),
+							'cache' => time()
                         ))->where("`id`='".$_GET['cid']."'")
                         ->update('Contest');
-				$app->setting->set("lastCache", time());
-			} else {
-				$list = unserialize($db->from('Contest')->where("`id`='".$_GET['cid']."'")->select('rank')->fetch_one()['rank']);
 			}
 		?>
         <center>

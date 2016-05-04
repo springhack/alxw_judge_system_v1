@@ -1,6 +1,6 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-04-11 11:43:32
+        Last modified: 2016-05-04 18:25:23
         Filename: contest_edit.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
@@ -35,6 +35,7 @@
 					'password' => get_magic_quotes_gpc()?$_POST['password']:addslashes($_POST['password']),
 					'time_s' => strtotime($_POST['time_s']),
 					'time_e' => strtotime($_POST['time_e']),
+					'cache' => '0',
 					'rank' => 'a:0:{}',
 					'time' => time()
 					))->insert("Contest");
