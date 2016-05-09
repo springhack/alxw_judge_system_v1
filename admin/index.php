@@ -1,6 +1,6 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-04-10 17:56:16
+        Last modified: 2016-05-09 13:09:23
         Filename: index.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
@@ -52,8 +52,12 @@
                 	<div class="item_parent selected" onclick="menu.open('main.php')">
                         <img src="img/dash.svg" />监控面板
                     </div>
-                	<div class="item_parent" onclick="menu.open('../manager.php')">
-                        <img src="img/dash.svg" />题目管理
+                	<div class="item_parent" onclick="menu.toggle('#problem')">
+                        <img src="img/dash.svg" />题目管理&nbsp;&nbsp;&nbsp;<font style="font-size: 15px;">∨</font>
+                    </div>
+                    <div id="problem" style="display: none;">
+                        <div class="item_children" onclick="menu.open('../manager.php')">VJ题目管理</div>
+                        <div class="item_children" onclick="menu.open('../AJC_ProblemManager.php')" <?php if (!file_exists('../classes/AJC_Problem.php')) echo "style='display: none;'";?>>AJC题目管理</div>
                     </div>
                 	<div class="item_parent" onclick="menu.open('../contest_edit.php')">
                         <img src="img/dash.svg" />比赛管理

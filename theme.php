@@ -1,6 +1,6 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-02-01 12:59:48
+        Last modified: 2016-05-09 13:21:42
         Filename: theme.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
@@ -10,7 +10,9 @@
 	$app = new App();
 	$user = new User();
 	if (!$user->isLogin())
-		redirect("Location: status.php?action=login");
+	require_once("api.php");
+	if ($user->getPower() != 0)
+		redirect("Location: admin/status.php?action=login");
 
 	function my_del($path)
 	{

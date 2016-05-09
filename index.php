@@ -1,6 +1,6 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-04-10 17:04:09
+        Last modified: 2016-05-09 13:19:33
         Filename: index.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
@@ -20,7 +20,7 @@
 			die('<center><h1><a href="index.php" style="color: #000000;">No such contest !</a></h1></center>');
 		}
 		@session_start();
-		if (!empty($res['password']) && $res['password'] != $_SESSION['contest_'.intval($_GET['cid'])])
+		if (!empty($res['password']) && isset($_SESSION['contest_'.intval($_GET['cid'])]) && $res['password'] != $_SESSION['contest_'.intval($_GET['cid'])])
 		{
 			header('Location: password.php?cid='.intval($_GET['cid']));
 			die();
