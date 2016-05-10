@@ -1,7 +1,7 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-05-09 13:21:16
-        Filename: ../manager.php
+        Last modified: 2016-05-10 22:45:16
+        Filename: manager.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
 <?php
@@ -16,7 +16,7 @@
 		{
 			$db = new MySQL();
 			$db->from("Problem")->where("`id`='".intval($_GET['id'])."'")->delete();
-			$db->from("Contest")->where("`list` like '%".intval($_GET['id'])."%'")->delete();
+			$db->from("Record")->where("`oid`='".intval($_GET['id'])."'")->delete();
 		}
 		if ($_GET['action'] == "trigger")
 		{
