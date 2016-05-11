@@ -1,6 +1,6 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-05-10 22:45:16
+        Last modified: 2016-05-11 10:27:07
         Filename: manager.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
@@ -28,6 +28,9 @@
 			} else {
 				$db->set(array('hide' => 'yes'))->where("`id`='".intval($_GET['id'])."'")->update('Problem');
 			}
+			//Just jump back to referer page
+			header('Location: '.$_SERVER['HTTP_REFERER']);
+			die();
 		}
 	}
 	if (isset($_POST['submit']))
@@ -129,7 +132,7 @@
 				<?php
 					$db = new MySQL();
 					$sstart = isset($_GET['page'])?(intval($_GET['page'])-1)*10:0;
-					$list = $db->from("Problem")->limit(10, $sstart)->select()->fetch_all();
+					$list = $db->from("Problem")->limit(10, $sstart)->order('desc', 'cast(id as signed)')->select()->fetch_all();
 					for ($i=0;$i<count($list);++$i)
 					{
 						echo "<tr>";
