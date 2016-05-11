@@ -1,9 +1,15 @@
 /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-02-01 23:13:40
-        Filename: css.css
+        Last modified: 2016-05-11 21:55:07
+        Filename: theme/default/css.css
         Description: Created by SpringHack using vim automatically.
 **/
+body {
+	background-image: url(theme/default/md_back.png);
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: 100% 100%;
+}
 body, div, img {
 	padding: 0px;
  	border: 0px;
