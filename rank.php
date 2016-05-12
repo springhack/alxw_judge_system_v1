@@ -1,6 +1,6 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-05-04 18:32:50
+        Last modified: 2016-05-12 21:05:45
         Filename: rank.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
@@ -60,7 +60,7 @@
 									->num_rows();
 						else
 							$no = $db->from("Record")
-									->where("`contest`='".$_GET['cid']."' AND `oid`='".$p_list[$j]."' AND `user`='".$u_list[$i]['user']."' AND `result`<>'Accepted' AND `reslut`<>'Submit Error' AND `time`<".$yes['time'])
+									->where("`contest`='".$_GET['cid']."' AND `oid`='".$p_list[$j]."' AND `user`='".$u_list[$i]['user']."' AND `result`<>'Accepted' AND `result`<>'Submit Error' AND `time`<".$yes['time'])
 									->order("ASC", "time")
 									->select()
 									->num_rows();
