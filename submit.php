@@ -1,6 +1,6 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-05-02 23:20:19
+        Last modified: 2016-05-12 19:21:21
         Filename: submit.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
@@ -20,10 +20,19 @@
 			die('<center><h1><a href="index.php" style="color: #000000;">No such contest !</a></h1></center>');
 		}
 		@session_start();
-		if (!empty($res['password']) && $res['password'] != $_SESSION['contest_'.intval($_GET['cid'])])
+		if (!empty($res['password']))
 		{
-			header('Location: password.php?cid='.intval($_GET['cid']));
-			die();
+			if (!isset($_SESSION['contest_'.intval($_GET['cid'])]))
+			{
+				header('Location: password.php?cid='.intval($_GET['cid']));
+				die();
+			} else {
+				if ($res['password'] != $_SESSION['contest_'.intval($_GET['cid'])])
+				{
+					header('Location: password.php?cid='.intval($_GET['cid']));
+					die();
+				}
+			}
 		}
 		$res = $db->from('Contest')->where("`id`='".intval($_GET['cid'])."'")->select()->fetch_one();
 		if ($res['time_s'] > time())
