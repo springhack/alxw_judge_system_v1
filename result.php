@@ -1,6 +1,6 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-05-13 15:26:00
+        Last modified: 2016-05-13 20:48:02
         Filename: result.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
@@ -55,6 +55,7 @@
 				require_once('classes/Record.php');
 				$db = new MySQL();
 				$arr = $db->from('Record')->where('`id`=\''.$_GET['id'].'\'')->select('id')->fetch_all();
+				$is_contest = false;
 				$contest_fix = $db->from('Contest')->where("`id`='".intval($_GET['cid'])."'")->select('list')->fetch_one();
 				if ($contest_fix)
 				{
@@ -77,7 +78,12 @@
                 	<?php echo $res['user']; ?>
                 </td>
                 <td>
-                	<?php echo $hash[$res['oid']]; ?>
+                	<?php
+						if ($is_contest)
+							echo $hash[$res['oid']];
+						else
+							echo $res['oid'];
+					?>
                 </td>
                 <td>
                 	<?php echo $res['result']; ?>
@@ -103,7 +109,7 @@
 		<script language="javascript" src="Widget/pageSwitcher/pageSwitcher.js"></script>
 		<script language='javascript'>
 			$(function () {
-					window.follow_progress();
+					window.follow_progress(<?php if($is_contest) echo intval($_GET['cid']); ?>);
 				});
 		</script>
 		<br /><br />

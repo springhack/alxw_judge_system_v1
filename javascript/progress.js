@@ -1,7 +1,7 @@
 /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-05-04 18:49:17
-        Filename: progress.js
+        Last modified: 2016-05-13 20:54:24
+        Filename: javascript/progress.js
         Description: Created by SpringHack using vim automatically.
 **/
 (function (window, undefined) {
@@ -9,6 +9,9 @@
 	var timeout = 6000;
 
 	window.follow_progress = function () {
+		var cid = 0;
+		if (arguments.length)
+			cid = arguments[0];
 		var p = $('#progress');
 		var n = $('#now');
 		var t = $('table:last tr:last td');
@@ -16,7 +19,8 @@
 		var count = p.width();
 		var cb = function () {
 			$.get('getJSON.php', {
-				id	:	id
+				id	:	id,
+				cid	:	cid
 			}, function (data) {
 				var json = $.parseJSON(data);
 				t.each(function (i, e) {
