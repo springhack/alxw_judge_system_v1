@@ -1,6 +1,6 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-05-12 19:21:21
+        Last modified: 2016-05-13 15:23:32
         Filename: submit.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
@@ -10,14 +10,23 @@
 		die('<center><a href=\'admin/status.php?action=login&url=../index.php\'>Please login or register first!</a></center>');
 	require_once("classes/Problem.php");
 	$db = new MySQL();
+	if (!is_numeric($_GET['id']))
+		die('<center><h1><a href="index.php" style="color: #000000;">Please don\'t try this again !</a></h1></center>');
+	$is_contest = false;
 	if (isset($_GET['cid']))
 	{
 		if (!is_numeric($_GET['cid']))
 			die('<center><h1><a href="index.php" style="color: #000000;">Please don\'t try this again !</a></h1></center>');
 		$res = $db->from('Contest')->where("`id`='".intval($_GET['cid'])."'")->select()->fetch_one();
 		if (!$res)
-		{
 			die('<center><h1><a href="index.php" style="color: #000000;">No such contest !</a></h1></center>');
+		if ($res)
+		{
+			$is_contest = true;
+			$tmp_arr = explode(',', $res['list']);
+			$hash = array();
+			for ($i=0;$i<count($tmp_arr);++$i)
+				$hash[$tmp_arr[$i]] = chr(65 + $i);
 		}
 		@session_start();
 		if (!empty($res['password']))
@@ -34,7 +43,6 @@
 				}
 			}
 		}
-		$res = $db->from('Contest')->where("`id`='".intval($_GET['cid'])."'")->select()->fetch_one();
 		if ($res['time_s'] > time())
 			die('<center><h1><a href="index.php" style="color: #000000;">Contest not start !</a></h1></center></body></html>');
 		if ($res['time_e'] < time())
@@ -95,7 +103,12 @@
         <table border="1">
         	<tr>
         		<td>
-    				<h2>Problem ID: <?php echo $_GET['id']; ?></h2>
+    				<h2>Problem ID: <?php
+										if (!$is_contest)
+											echo $_GET['id'];
+										else
+											echo $hash[$_GET['id']];
+									?></h2>
                         Language:
                         <select name="lang">
                             <?php

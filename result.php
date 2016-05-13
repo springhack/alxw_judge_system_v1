@@ -1,7 +1,7 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-05-02 19:33:51
-        Filename: ../result.php
+        Last modified: 2016-05-13 15:26:00
+        Filename: result.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -16,7 +16,12 @@
     	<center>
         <?php require_once("header.php"); ?>
         <h1>Problem Status List</h1>
-		<?php if (!isset($_GET['id'])) die('<center><h2>非法操作!</h2></center>'); ?>
+		<?php
+			if (!isset($_GET['id']))
+				die('<center><h2>非法操作!</h2></center>');
+			if (!preg_match("/^\w*$/", $_GET['id']))
+				die('<center><h2>非法操作!</h2></center>');
+		?>
 		<div id='progress'><div id='now'></div></div>
     	<table border="1">
         	<tr>
@@ -50,6 +55,15 @@
 				require_once('classes/Record.php');
 				$db = new MySQL();
 				$arr = $db->from('Record')->where('`id`=\''.$_GET['id'].'\'')->select('id')->fetch_all();
+				$contest_fix = $db->from('Contest')->where("`id`='".intval($_GET['cid'])."'")->select('list')->fetch_one();
+				if ($contest_fix)
+				{
+					$is_contest = true;
+					$tmp_arr = explode(',', $contest_fix['list']);
+					$hash = array();
+					for ($i=0;$i<count($tmp_arr);++$i)
+						$hash[$tmp_arr[$i]] = chr(65 + $i);
+				}
 				for ($i=0;$i<count($arr);++$i)
 				{
 					$pro = new Record($arr[$i]['id']);
@@ -63,7 +77,7 @@
                 	<?php echo $res['user']; ?>
                 </td>
                 <td>
-                	<?php echo $res['oid']; ?>
+                	<?php echo $hash[$res['oid']]; ?>
                 </td>
                 <td>
                 	<?php echo $res['result']; ?>

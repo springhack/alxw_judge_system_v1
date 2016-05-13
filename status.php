@@ -1,6 +1,6 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-05-02 19:20:33
+        Last modified: 2016-05-13 15:25:40
         Filename: status.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
@@ -46,10 +46,21 @@
             	require_once('api.php');
 				require_once('classes/Record.php');
 				$db = new MySQL();
+				$is_contest = false;
 				if (isset($_GET['cid']))
-					$arr = $db->from('Record')->where("`contest`='".$_GET['cid']."'")->limit(10, $start)->order('DESC', 'time')->select('id')->fetch_all();
-				else
-					$arr = $db->from('Record')->limit(10, $start)->order('DESC', 'time')->select('id')->fetch_all();
+				{
+					$arr = $db->from('Record')->where("`contest`='".intval($_GET['cid'])."'")->limit(10, $start)->order('DESC', 'time')->select('id')->fetch_all();
+					$contest_fix = $db->from('Contest')->where("`id`='".intval($_GET['cid'])."'")->select('list')->fetch_one();
+					if ($contest_fix)
+					{
+						$is_contest = true;
+						$tmp_arr = explode(',', $contest_fix['list']);
+						$hash = array();
+						for ($i=0;$i<count($tmp_arr);++$i)
+							$hash[$tmp_arr[$i]] = chr(65 + $i);
+					}
+				} else
+					$arr = $db->from('Record')->where("`contest`='0'")->limit(10, $start)->order('DESC', 'time')->select('id')->fetch_all();
 				for ($i=0;$i<count($arr);++$i)
 				{
 					$pro = new Record($arr[$i]['id']);
@@ -63,7 +74,12 @@
                 	<?php echo $res['user']; ?>
                 </td>
                 <td>
-                	<?php echo $res['oid']; ?>
+                	<?php
+						if($is_contest)
+							echo $hash[$res['oid']];
+						else
+							echo $res['oid'];
+					?>
                 </td>
                 <td>
                 	<?php echo $res['result']; ?>

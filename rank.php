@@ -1,6 +1,6 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-05-12 21:05:45
+        Last modified: 2016-05-13 15:16:47
         Filename: rank.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
@@ -29,6 +29,8 @@
         	require_once("api.php");
 			$db = new MySQL();
 			$res_t = $db->from('Contest')->where("`id`='".$_GET['cid']."'")->select('cache,rank')->fetch_one();
+			if (!$res_t)
+                die('<center><h1><a href="index.php" style="color: #000000;">No such contest !</a></h1></center></body></html>');
 			$time = intval($res_t['cache']);
 			$list = unserialize($res_t['rank']);
 			if ((time() - intval($time)) > 30)
@@ -124,7 +126,7 @@
                     </td>
                     <?php
                     	for ($i=1;$i<=count(explode(',', $db->from("Contest")->where("`id`='".$_GET['cid']."'")->select("list")->fetch_one()['list']));++$i)
-							echo '<td data-type="rank" align="center" width="40">'.$i.'</td>';
+							echo '<td data-type="rank" align="center" width="40">'.chr(64 + $i).'</td>';
 					?>
                 </tr>
             	<?php
