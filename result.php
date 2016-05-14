@@ -1,6 +1,6 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-05-13 20:48:02
+        Last modified: 2016-05-14 09:42:55
         Filename: result.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
@@ -56,14 +56,17 @@
 				$db = new MySQL();
 				$arr = $db->from('Record')->where('`id`=\''.$_GET['id'].'\'')->select('id')->fetch_all();
 				$is_contest = false;
-				$contest_fix = $db->from('Contest')->where("`id`='".intval($_GET['cid'])."'")->select('list')->fetch_one();
-				if ($contest_fix)
+				if (isset($_GET['cid']))
 				{
-					$is_contest = true;
-					$tmp_arr = explode(',', $contest_fix['list']);
-					$hash = array();
-					for ($i=0;$i<count($tmp_arr);++$i)
-						$hash[$tmp_arr[$i]] = chr(65 + $i);
+					$contest_fix = $db->from('Contest')->where("`id`='".intval($_GET['cid'])."'")->select('list')->fetch_one();
+					if ($contest_fix)
+					{
+						$is_contest = true;
+						$tmp_arr = explode(',', $contest_fix['list']);
+						$hash = array();
+						for ($i=0;$i<count($tmp_arr);++$i)
+							$hash[$tmp_arr[$i]] = chr(65 + $i);
+					}
 				}
 				for ($i=0;$i<count($arr);++$i)
 				{
