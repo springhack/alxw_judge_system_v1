@@ -1,9 +1,34 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-05-13 15:16:47
+        Last modified: 2016-05-15 21:05:17
         Filename: rank.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
+<?php
+    require_once("api.php");
+	$db = new MySQL();
+	if (isset($_GET['cid']))
+	{
+		$res = $db->from('Contest')->where("`id`='".intval($_GET['cid'])."'")->select()->fetch_one();
+		if (!$res)
+			die('<center><h1><a href="index.php" style="color: #000000;">No such contest !</a></h1></center>');
+		@session_start();
+		if (!empty($res['password']))
+		{
+			if (!isset($_SESSION['contest_'.intval($_GET['cid'])]))
+			{
+				header('Location: password.php?cid='.intval($_GET['cid']));
+				die();
+			} else {
+				if ($res['password'] != $_SESSION['contest_'.intval($_GET['cid'])])
+				{
+					header('Location: password.php?cid='.intval($_GET['cid']));
+					die();
+				}
+			}
+		}
+	}
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
@@ -26,8 +51,6 @@
                 die('<center><h1><a href="index.php" style="color: #000000;">No such contest !</a></h1></center></body></html>');
 		?>
     	<?php
-        	require_once("api.php");
-			$db = new MySQL();
 			$res_t = $db->from('Contest')->where("`id`='".$_GET['cid']."'")->select('cache,rank')->fetch_one();
 			if (!$res_t)
                 die('<center><h1><a href="index.php" style="color: #000000;">No such contest !</a></h1></center></body></html>');
