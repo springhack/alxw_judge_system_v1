@@ -1,6 +1,6 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-05-15 21:05:17
+        Last modified: 2016-05-28 09:48:32
         Filename: rank.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
@@ -51,7 +51,8 @@
                 die('<center><h1><a href="index.php" style="color: #000000;">No such contest !</a></h1></center></body></html>');
 		?>
     	<?php
-			$res_t = $db->from('Contest')->where("`id`='".$_GET['cid']."'")->select('cache,rank')->fetch_one();
+			$res_t = $db->from('Contest')->where("`id`='".$_GET['cid']."'")->select()->fetch_one();
+			$res_all = $db->from('Record')->where("`contest`='".$_GET['cid']."'")->select()->order('ASC', 'time')->fetch_all();
 			if (!$res_t)
                 die('<center><h1><a href="index.php" style="color: #000000;">No such contest !</a></h1></center></body></html>');
 			$time = intval($res_t['cache']);
@@ -59,8 +60,8 @@
 			if ((time() - intval($time)) > 30)
 			{
                 $u_list = $db->from("Record")->where("`contest`='".$_GET['cid']."'")->select('distinct user')->fetch_all();
-				$p_list = explode(',', $db->from("Contest")->where("`id`='".$_GET['cid']."'")->select("list")->fetch_one()['list']);
-				$start = $db->from("Contest")->where("`id`='".$_GET['cid']."'")->select("time_s")->fetch_one()['time_s'];
+				$p_list = explode(',', $res_t['list']);
+				$start = $res_t['time_s'];
 				$list = array();
 				for ($i=0;$i<count($u_list);++$i)
 				{
@@ -72,23 +73,46 @@
 						);
 					for ($j=0;$j<count($p_list);++$j)
 					{
+						$yes = '';
+						foreach ($res_all as $item)
+							if ($item['oid'] == $p_list[$j] && $item['user'] == $u_list[$i]['user'] && $item['result'] == 'Accepted')
+							{
+								$yes = $item;
+								break;
+							}
+						/**
 						$yes = $db->from("Record")
 									->where("`contest`='".$_GET['cid']."' AND `oid`='".$p_list[$j]."' AND `user`='".$u_list[$i]['user']."' AND `result`='Accepted'")
 									->order("ASC", "time")
 									->select()
 									->fetch_one();
-						if ($yes == "")
+						**/
+						if ($yes == '')
+						{
+							$no = 0;
+							foreach ($res_all as $item)
+								if ($item['oid'] == $p_list[$j] && $item['user'] == $u_list[$i]['user'] && $item['result'] != 'Accepted' && $item['result'] != 'Submit Error')
+									++$no;
+							/**
 							$no = $db->from("Record")
 									->where("`contest`='".$_GET['cid']."' AND `oid`='".$p_list[$j]."' AND `user`='".$u_list[$i]['user']."' AND `result`<>'Accepted' AND `result`<>'Submit Error'")
 									->order("ASC", "time")
 									->select()
 									->num_rows();
-						else
+							**/
+						} else {
+							$no = 0;
+							foreach ($res_all as $item)
+								if ($item['oid'] == $p_list[$j] && $item['user'] == $u_list[$i]['user'] && $item['result'] != 'Accepted' && $item['result'] != 'Submit Error' && $item['time'] < $yes['time'])
+									++$no;
+							/**
 							$no = $db->from("Record")
 									->where("`contest`='".$_GET['cid']."' AND `oid`='".$p_list[$j]."' AND `user`='".$u_list[$i]['user']."' AND `result`<>'Accepted' AND `result`<>'Submit Error' AND `time`<".$yes['time'])
 									->order("ASC", "time")
 									->select()
 									->num_rows();
+							**/
+						}
 						$list[$i][$j] = array(
 								'pid' => $p_list[$j],
 								'result' => ($yes == "")?"no":"yes",
