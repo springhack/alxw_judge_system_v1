@@ -1,7 +1,7 @@
 /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2015-12-07 11:36:35
-        Filename: javascript/common.js
+        Last modified: 2016-05-31 09:32:09
+        Filename: theme/snow drop/js.js
         Description: Created by SpringHack using vim automatically.
 **/
 $(function () {
@@ -11,11 +11,12 @@ $(function () {
 					$(this).addClass("menu");
 			});
 		$(document.body).append("<center><br /><h5><a href='http://www.90its.cn/' target='_blank' style='color: #000000;'>Designed by SpringHack in Cello Studio</a></h5></center>");
+		$('.navigator.contest').css('padding-bottom', '20px').parent().css('padding-bottom', '40px')
 	});
 
 $(function(){
   			var d="<div class='snow'>❅<div>"
-			setInterval(function () {
+			var timer = setInterval(function () {
 				var f = $(document).width();
 				var e = Math.random()*f - 100;
 				var o = 0.3 + Math.random();
@@ -32,4 +33,8 @@ $(function(){
 					opacity: 0.1,
 				},k, "linear", function () {$(this).remove()})
 			},200)
-})
+			window.stopSnow = function () {
+				clearInterval(timer);
+				$('.snow').remove();
+			};
+});
