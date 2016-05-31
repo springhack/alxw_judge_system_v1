@@ -27,4 +27,8 @@
 		header($str);
 		die();
 	}
+
+	if (!function_exists('mysql_connect'))
+		require_once('mysql_mysqli.php');
+
 ?>
