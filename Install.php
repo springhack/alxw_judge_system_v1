@@ -11,7 +11,7 @@
 	$app = new App();
 	mysql_query("CREATE DATABASE ".$Config['DB_NAME'], $sql);
 	mysql_select_db($Config['DB_NAME'], $sql);
-	mysql_query("SET NAMES utf8");
+	mysql_query("SET NAMES utf8", $sql);
 	$app->user = new User();
 	$app->user->userRegister($Config['AUTO_USER'], $Config['AUTO_PASS'], "", 0);
 	@file_put_contents(".install", "Cello Studio");

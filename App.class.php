@@ -22,7 +22,7 @@
 			if (!$sql)
 				die("Error connect database!");
 			mysql_select_db($Config['DB_NAME'], $sql);
-			mysql_query("SET NAMES utf8");
+			mysql_query("SET NAMES utf8", $sql);
 			@session_start();
 		}
 		public function version()
