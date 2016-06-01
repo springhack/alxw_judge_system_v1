@@ -1,31 +1,27 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-04-16 09:38:58
+        Last modified: 2016-06-01 22:29:17
         Filename: Server.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
 <?php
-	chdir(dirname(__FILE__));
-	require_once('../Config.Daemon.php');
-	$pid = array();
+	require_once(dirname(__FILE__).'/../Config.Daemon.php');
+	pcntl_signal(SIGCHLD, SIG_IGN);
 	foreach ($conf['OJ_LIST'] as $oj)
 	{
-		$pid[] = pcntl_fork();
-		switch ($pid[count($pid) - 1])
+		$pid = pcntl_fork();
+		switch ($pid)
 		{
 			case -1:
-				fprintf(STDERR, "[E] => Fork error on oj %s.\n", $oj);
-				exit;
+				echo 'Error';
+				exit(-1);
 			break;
 			case 0:
-				require_once($oj.'_Server.php');
-				exit;
+				require_once(dirname(__FILE__).'/'.$oj.'_Server.php');
+				exit(0);
+			break;
 			default:
 			break;
 		}
 	}
-	foreach ($pid as $item)
-		if ($item)
-			pcntl_waitpid($item, $status);
-	echo "Listening...\n";
 ?>
