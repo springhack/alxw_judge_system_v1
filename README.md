@@ -23,8 +23,8 @@ PS: GPL保证你可以合法忽略以上注意事项但不能保证你不受鄙�
         service apache2 restart
 		vim /etc/apache2/apache2.conf
         sudo git clone https://github.com/springhack/alxwvj.git /var/www/html/alxwvj
-        cd /var/www/html/alxwvj
-        sudo nohup php classes/Server.php &
+        cd /var/www/html/alxwvj/classes/
+		sudo php Server.php start  (alxwd需要配置,配置完成手动复制到/etc/init.d/alxwd)
     3、安装后访问服务器80端口上的Web服务alxwvj目录进行初始化安装
         例如 w3m http://localhost/alxwvj
         

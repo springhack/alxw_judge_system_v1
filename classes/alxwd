@@ -1,0 +1,24 @@
+#! /bin/sh
+# chkconfig: 2345 55 25
+# Description: Startup script for alxwvj on Debian. Place in /etc/init.d and
+# run 'update-rc.d -f alxwd defaults', or use the appropriate command on your
+# distro. For CentOS/Redhat run: 'chkconfig --add alxwd'
+
+### BEGIN INIT INFO
+# Provides:          alxwd
+# Required-Start:    $all
+# Required-Stop:     $all
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: starts the alxwvj daemon
+# Description:       starts alxwvj daemon using start-stop-daemon
+### END INIT INFO
+
+# Author:   SpringHack
+# website:  http://blog.90its.cn/
+
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+NAME=alxwd
+NGINX_BIN=/home/wwwroot/default/classes/Server.php
+
+php $NGINX_BIN $@
