@@ -33,7 +33,7 @@
 						<?php } ?>
                     	<?php
 							if ($app->user->isLogin())
-								echo '<font style="display: inline-block; padding: 5px; border-radius: 5px;">'.$app->user->getUser().'</font> => <a href="admin/status.php?action=logout&url=../index.php">登出</a>';
+								echo '<a href="admin/status.php?action=logout&url=../index.php">登出</a> => <font style="display: inline-block; padding: 5px; border-radius: 5px;">'.$app->user->getUser().'</font>';
 							else
 								echo '<a href="admin/status.php?action=login&url=../index.php">登录</a>';
 						?>
