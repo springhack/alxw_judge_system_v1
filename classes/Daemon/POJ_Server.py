@@ -186,7 +186,7 @@ def Worker(item, oj_user, oj_pass, index):
 	ExitThread(index, cookie)
 	thread.exit_thread()
 
-def main():
+def Watcher():
 	global TaskCount
 	while True:
 		time.sleep(3)
@@ -197,7 +197,9 @@ def main():
 			Log('[I] => Have %d idlei thread ...' % can)
 			res = getList(can)
 			for item in res:
+				Mutex.acquire()
 				TaskCount += 1
+				Mutex.release()
 				uu = []
 				for i in range(0, len(db.config.poj_user)):
 					if db.config.poj_user[i][2] != True:
@@ -209,6 +211,11 @@ def main():
 		except Exception,e:
 			print e	
 
+def main():
+	Log('[I] => Starting Watcher thread ...')
+	thread.start_new_thread(Watcher, ())
+	while True:
+		time.sleep(1000)
 
 if __name__ == '__main__':
 	main()
