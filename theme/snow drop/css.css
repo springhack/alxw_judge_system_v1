@@ -26,13 +26,19 @@ h1 {
 tr {
 	transition: all .5s;
 }
+center {
+	z-index: 1000;
+	position: absolute;
+	width: 100%;
+}
 
 .header {
-	background-color: #123;
+	background-color: #E0ADF2;
 	height: 300px;
 	background-image: url('theme/snow drop/logo.png');
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
+	opacity: 0.8;
 }
 .navigator {
 	background-color: #000;
@@ -64,6 +70,7 @@ tr {
 a {
 	color: #ffffff;
 	transition: all .5s;
+	text-decoration: none;
 }
 a:hover {
 	color: #ffffff;
