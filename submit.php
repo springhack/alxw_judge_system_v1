@@ -1,6 +1,6 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-05-13 20:43:15
+        Last modified: 2016-06-27 21:27:34
         Filename: submit.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
@@ -61,12 +61,13 @@
 	{
 		if (!is_numeric($_GET['id']) || !is_numeric($_POST['lang']))
 			die('<center><h1><a href="index.php" style="color: #000000;">Please don\'t try this again !</a></h1></center>');
+		$_SESSION['lasttime'] = $app->setting->get($_SESSION['user'].'_lasttime', 0);
 		if (isset($_SESSION['lasttime']))
 		{
 			if (time() - intval($_SESSION['lasttime']) < 10)
 				die('<center><a href=\'index.php\'>Please submit 10s later !</a></center>');
 		}
-		$_SESSION['lasttime'] = time();
+//		$_SESSION['lasttime'] = time();
 		$pro->submitCode($_POST['lang'], $_POST['code'], isset($_GET['cid'])?$_GET['cid']:'0');
 		header("Location: result.php?id=".$_SESSION['last_id'].(isset($_GET['cid'])?'&cid='.$_GET['cid']:''));
 	}
