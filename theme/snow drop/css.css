@@ -88,7 +88,7 @@ a.btn:hover {
 	color: #000;
 }
 #progress {
-	width: 100%;
+	width: 500px;
    	height: 5px;
 	border-radius: 2px;
 	border: 1px solid #AAA;
