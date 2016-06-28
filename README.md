@@ -36,6 +36,7 @@ Linux新手请看鸟哥的私房菜http://vbird.dic.ksu.edu.tw/linux_basic/linux
 
 最新更新
 
+    修改了一套主题2333
     修复Installation流程
 	基本兼容PHP7(Test on lnmp, php version 7.0.6)
     修复不在classes目录不能启动的问题
