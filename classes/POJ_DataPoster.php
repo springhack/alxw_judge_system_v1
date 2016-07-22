@@ -31,8 +31,6 @@
             //Encode code
             $_code = $this->code_encode('//<ID>'.$rid.'</ID>'."\n".$code);
 			
-            file_put_contents('tmp.txt', $_code);
-
 			//Add record
 			$ret = $this->db->value(array(
 					'id' => $rid,
