@@ -18,15 +18,21 @@
 		private $user = "";
 		private $pass = "";
 		private $rid = "";
-		
+
+
 		public function POJ_DataPoster($user = "skvj01", $pass = "forskvj", $id = "1000", $lang = "0", $code = "", $cid = '0')
 		{
 			//MySQL
 			$this->db = new MySQL();
 
 			//Infomation
-			$rid = $_POST['rid'];
+			$rid = uniqid();
+
+            //Encode code
+            $_code = $this->code_encode('//<ID>'.$rid.'</ID>'."\n".$code);
 			
+            file_put_contents('tmp.txt', $_code);
+
 			//Add record
 			$ret = $this->db->value(array(
 					'id' => $rid,
@@ -42,7 +48,7 @@
 					'oj' => 'POJ',
 					'oj_u' => $user,
 					'oj_p' => $pass,
-					'code' => $code,
+					'code' => $_code,
 					'contest' => $cid
 				))->insert("Record");
 			$_SESSION['last_id'] = $rid;	
@@ -52,6 +58,22 @@
 		{
 			return $this->data;
 		}
+
+        public function code_encode($string)
+        {
+            $string = preg_replace('/\r\n/', "\n", $string);
+            $input = '';
+            for ($i=0;$i<strlen($string);++$i)
+            {
+                if (ord($string[$i]) > 127)
+                {
+                    $i += 2;
+                    $input .= '_';
+                } else
+                    $input .= $string[$i];
+            }
+            return base64_encode($input);
+        }
 		
 	}
 	
