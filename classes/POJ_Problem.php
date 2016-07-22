@@ -12,11 +12,18 @@
 		
 		private $pro_info = array();
 		private $pro_submit = NULL;
+        private $id = 1000;
 		
 		public function POJ_Problem($id = 1000)
 		{
+            $this->id = $id;
+            //Nothing to do here...
+		}
+		
+		public function getInfo()
+		{
 			require_once(dirname(__FILE__)."/HTMLParser.php");
-			$html = new HTMLParser("http://poj.org/problem?id=".$id);
+			$html = new HTMLParser("http://poj.org/problem?id=".$this->id);
 			$html->optHTMLLink();
 			$pro_info = array(
 					'title' => $html->innerHTML('<div class="ptt" lang="en-US">', '</div>')
@@ -34,10 +41,6 @@
 			$pro_info['hint'] = $html->innerHTML('<p class="pst">Hint</p><div class="ptx" lang="en-US">', '</div><p class="pst">Source</p>');
 			$pro_info['source'] = $html->innerHTML('<p class="pst">Source</p><div class="ptx" lang="en-US">', '</div>');
 			$this->pro_info = $pro_info;
-		}
-		
-		public function getInfo()
-		{
 			return $this->pro_info;
 		}
 		
