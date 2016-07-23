@@ -40,4 +40,9 @@
 		return mysqli_ping($sql);
 	}
 
+    function mysql_insert_id(&$sql)
+    {
+        return mysqli_insert_id($sql);
+    }
+
 ?>

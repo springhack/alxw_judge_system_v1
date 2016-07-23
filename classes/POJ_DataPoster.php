@@ -24,19 +24,12 @@
 		{
 			//MySQL
 			$this->db = new MySQL();
-
-			//Infomation
-			$rid = uniqid();
-
-            //Encode code
-            $_code = $this->code_encode('//<ID>'.$rid.'</ID>'."\n".$code);
 			
 			//Add record
 			$ret = $this->db->value(array(
-					'id' => $rid,
 					'oid' => $_GET['id'],
 					'tid' => $id,
-					'rid' => '__',
+					'rid' => '1234',
 					'user' => $_SESSION['user'],
 					'time' => time(),
 					'memory' => 'N/A',
@@ -46,10 +39,21 @@
 					'oj' => 'POJ',
 					'oj_u' => $user,
 					'oj_p' => $pass,
-					'code' => $_code,
+					'code' => 'This is a joke',
 					'contest' => $cid
 				))->insert("Record");
-			$_SESSION['last_id'] = $rid;	
+
+            //Get LocalID
+			$_SESSION['last_id'] = $this->db->mysql_insert_id();
+
+            //Encode code
+            $_code = $this->code_encode('//<ID>'.$_SESSION['last_id'].'</ID>'."\n".$code);
+
+            //Update code and set can judge
+            $this->db->set(array(
+                'code' => $_code,
+                'rid' => '__'
+            ))->where('`id`='.$_SESSION['last_id'])->update('Record');
 		}
 		
 		public function getData()

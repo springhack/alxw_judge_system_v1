@@ -10,7 +10,7 @@
 	if ($db->query("SHOW TABLES LIKE 'Record'")->num_rows() != 1)
 	{
 		$db->struct(array(
-				'id' => 'text',
+				'id' => 'int primary key not null auto_increment',
 				'oid' => 'text',
 				'rid' => 'text',
 				'tid' => 'text',
