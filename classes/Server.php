@@ -99,7 +99,11 @@
 
 	if (count($argv) < 2)
 		echo "Usage: $argv[0] {start|stop|restart|status}".PHP_EOL;
-	else
-		$argv[1]();
+	else {
+        if (function_exists($argv[1]))
+    		$argv[1]();
+        else
+		    echo "Usage: $argv[0] {start|stop|restart|status}".PHP_EOL;
+    }
 
 ?>
