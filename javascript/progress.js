@@ -15,6 +15,8 @@
 		var p = $('#progress');
 		var n = $('#now');
 		var t = $('table:last tr:last td');
+        var code = $('#code');
+        var compile = $('#compile');
 		var id = /id=([\da-zA-Z]*)[&]{0,}/.exec(location.href)[1];
 		var count = p.width();
 		var cb = function () {
@@ -26,6 +28,8 @@
 				t.each(function (i, e) {
 					e.innerHTML = json[i];
 				});
+                code.html(json['code']);
+                compile.html(json['compileinfo']);
 			});
 			n.width(0);
 			n.animate({

@@ -24,7 +24,8 @@
 				'oj_u' => 'text',
 				'oj_p' => 'text',
 				'code' => 'longtext',
-				'contest' => 'text'
+				'contest' => 'text',
+                'compileinfo' => 'longtext'
 			))->create("Record");
 	}
 	if (isset($_GET['cid']))
@@ -125,7 +126,7 @@
 					?>
                 </td>
                 <td>
-                	<?php echo $res['result']; ?>
+                	<font style='color:#1976D2;text-decoration:underline;cursor:pointer;' onclick="javascript:location.href='result.php?id=<?php echo $res['id']; ?>'"><?php echo $res['result']; ?></font>
                 </td>
                 <td>
                 	<?php echo $res['memory']; ?>

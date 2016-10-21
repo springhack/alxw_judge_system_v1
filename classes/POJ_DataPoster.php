@@ -47,7 +47,7 @@
 			$_SESSION['last_id'] = $this->db->mysql_insert_id();
 
             //Encode code
-            $_code = $this->code_encode('//<ID>'.$_SESSION['last_id'].'</ID>'."\n".$code);
+            $_code = $this->code_encode('//<ID>'.$_SESSION['last_id'].'</ID>'.PHP_EOL.$code);
 
             //Update code and set can judge
             $this->db->set(array(

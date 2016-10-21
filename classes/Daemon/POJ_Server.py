@@ -11,6 +11,7 @@ import pycurl
 import urllib
 import threading
 import StringIO
+import MySQLdb
 
 
 DEBUG = True
@@ -181,8 +182,12 @@ def Worker(item, oj_user, oj_pass, index):
 		result[1] = '0K'
 	if result[2] == '':
 		result[2] = '0MS'
+	# Get compile info
+	html = CurlGET("http://poj.org/showcompileinfo?solution_id=%s" % RunID, cookie)
+	c_info = re.findall(r'<font size=3>(.*)</font></p></ul>', html, re.S)
+	c_info = c_info[0].replace('<pre>', '').replace('</pre>', '')
 	# Update result
-	db.run_sql("update Record set `rid`='%s',`memory`='%s',`long`='%s',`lang`='%s',`result`='%s' where `id`='%s'" % (RunID, result[1], result[2], result[3], result[0], item[0]))
+	db.run_sql("update Record set `rid`='%s',`memory`='%s',`long`='%s',`lang`='%s',`result`='%s',`compileinfo`='%s' where `id`='%s'" % (RunID, result[1], result[2], result[3], result[0], MySQLdb.escape_string(c_info), item[0]))
 	if result[0] == 'Accepted':
 		t_res = db.run_sql("select distinct oid from Record where `user`='%s' and result='Accepted'" % item[4])
 		t_res = map(lambda ptr:ptr[0], t_res)

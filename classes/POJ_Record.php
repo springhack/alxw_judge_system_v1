@@ -53,6 +53,8 @@
 		{
 			$this->db = new MySQL();
 			$this->res = $this->db->from("Record")->where("`id` = '".$this->id."'")->select()->fetch_one();
+            $this->res['code'] = base64_decode($this->res['code']);
+            $this->res['code'] = str_replace('//<ID>'.$this->id.'</ID>'.PHP_EOL, '', $this->res['code']);
 			return $this->res;
 		}
 

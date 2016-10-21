@@ -21,6 +21,12 @@
 				die('<center><h2>非法操作!</h2></center>');
 			if (!preg_match("/^\w*$/", $_GET['id']))
 				die('<center><h2>非法操作!</h2></center>');
+           	require_once('api.php');
+			require_once('classes/Record.php');
+			$db = new MySQL();
+			$arr = $db->from('Record')->where('`id`=\''.$_GET['id'].'\'')->select('id,user')->fetch_all();
+            if ($arr[0]['user'] != $app->user->getUser())
+                die('<center><h3><a href=\'admin/status.php?action=login&url=../index.php\'>You hane no permission to view this page !</a></h3></center>');
 		?>
 		<div id='progress'><div id='now'></div></div>
     	<table border="1">
@@ -51,10 +57,6 @@
                 </td>
             </tr>
             <?php
-            	require_once('api.php');
-				require_once('classes/Record.php');
-				$db = new MySQL();
-				$arr = $db->from('Record')->where('`id`=\''.$_GET['id'].'\'')->select('id')->fetch_all();
 				$is_contest = false;
 				if (isset($_GET['cid']))
 				{
@@ -108,6 +110,20 @@
 				}
 			?>
         </table>
+        <div id='info' style='display:flex;text-align:left;'>
+            <div style='width:50%;'>
+                <legend>Code:</legend>
+                <pre id='code' style='font-size:11px;white-space:pre-wrap;'><?php
+                    echo $res['code'];
+                ?></pre>
+            </div>
+            <div style='width:50%;'>
+                <legend>Compile Info:</legend>
+                <pre id='code' style='font-size:11px;white-space:pre-wrap;'><?php
+                    echo $res['compileinfo'];
+                ?></pre>
+            </div>
+        </div>
         <br /><br />
 		<script language="javascript" src="Widget/pageSwitcher/pageSwitcher.js"></script>
 		<script language='javascript'>

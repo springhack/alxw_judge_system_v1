@@ -40,6 +40,8 @@
 		$res['memory'],
 		$res['long'],
 		$res['lang'],
-		date("Y-M-D H:i:s", $res['time'])
+		date("Y-M-D H:i:s", $res['time']),
+        'code' => $res['code'],
+        'compileinfo' => $res['compileinfo']
 	));
 ?>
