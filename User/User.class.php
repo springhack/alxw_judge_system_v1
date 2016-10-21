@@ -19,7 +19,8 @@
 						pass text,
 						power int,
 						time text,
-						json longtext
+						json longtext,
+                        plist longtext
 					) DEFAULT CHARSET = UTF8; 
 				", $sql);
 			}
@@ -66,6 +67,18 @@
 				$ret[] = $row['user'];
 			return $ret;
 		}
+        public function getPlist()
+        {
+			global $sql;
+			$result = mysql_query("SELECT plist FROM Users 
+									WHERE user = '".$_SESSION['user']."'", $sql);
+			while($row = mysql_fetch_array($result))
+			{
+				return $row['plist'];
+				break;
+			}
+			return false;
+        }
 		public function getPass($user = NULL)
 		{
 			global $sql;

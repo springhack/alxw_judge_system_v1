@@ -19,6 +19,8 @@
 			} else
 				$alert = "修改失败!";
 	}
+    $plist = $user->getPlist();
+    $list = explode(' ', $plist);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -37,7 +39,14 @@
                     <label>密码修改:</label><br /><br />
                     <label> 原密码(<font style="color: #F00;">*</font>): </label><input type="password" name="old" /><br /><br />
                     <label> 新密码(<font style="color: #F00;">*</font>): </label><input type="password" name="new" /> (<font style="color: #0F0;">不修改请留空</font>)<br /><br />
-                    <input type="submit" name="submit" value="提交修改" />
+                    <input type="submit" name="submit" value="提交修改" /><br /><br />
+                    <label>通过的题目:</label><br /><br />
+                    <p>
+                        <?php
+                            foreach ($list as $p)
+                                echo '<a href="#" onclick="javascript:window.parent.document.location.href=\'../view.php?id='.$p.'\'">'.$p.'</a>&nbsp;';
+                        ?>
+                    </p>
                 </div>
             </form>
         </center>

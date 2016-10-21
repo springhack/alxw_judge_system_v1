@@ -183,6 +183,11 @@ def Worker(item, oj_user, oj_pass, index):
 		result[2] = '0MS'
 	# Update result
 	db.run_sql("update Record set `rid`='%s',`memory`='%s',`long`='%s',`lang`='%s',`result`='%s' where `id`='%s'" % (RunID, result[1], result[2], result[3], result[0], item[0]))
+	if result[0] == 'Accepted':
+		t_res = db.run_sql("select distinct oid from Record where `user`='%s' and result='Accepted'" % item[4])
+		t_res = map(lambda ptr:ptr[0], t_res)
+		db.run_sql("update Users set `plist`='%s' where `user`='%s'" % (' '.join(t_res), item[4]))
+		Log('[I] => Solved problem list updated')
 	ExitThread(index, cookie)
 	thread.exit_thread()
 

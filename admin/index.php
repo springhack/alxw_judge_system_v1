@@ -38,7 +38,7 @@
         </div>
         <div id="container">
         	<div id="navigator">
-            	<div id="nav_left">
+            	<div id="nav_left" <?php if ($user->getPower() != 0) echo "style='display: none;'";?>>
                 	<a href="#" title="新建文章" onclick="menu.open('eedit.php?id=new')"><img src="img/edit.png" /></a>
                     <a href="#" title="新建页面" onclick="menu.open('pedit.php?n=new')"><img src="img/page.png" /></a>
                     <a href="#" title="网站属性" onclick="menu.open('config.php')"><img src="img/config.png" /></a>
@@ -52,20 +52,20 @@
                 	<div class="item_parent selected" onclick="menu.open('main.php')">
                         <img src="img/dash.svg" />监控面板
                     </div>
-                	<div class="item_parent" onclick="menu.toggle('#problem')">
+                	<div class="item_parent" onclick="menu.toggle('#problem')" <?php if ($user->getPower() != 0) echo "style='display: none;'";?>>
                         <img src="img/dash.svg" />题目管理&nbsp;&nbsp;&nbsp;<font style="font-size: 15px;">∨</font>
                     </div>
                     <div id="problem" style="display: none;">
                         <div class="item_children" onclick="menu.open('../manager.php')">VJ题目管理</div>
                         <div class="item_children" onclick="menu.open('../AJC_ProblemManager.php')" <?php if (!file_exists('../classes/AJC_Problem.php')) echo "style='display: none;'";?>>AJC题目管理</div>
                     </div>
-                	<div class="item_parent" onclick="menu.open('../contest_edit.php')">
+                	<div class="item_parent" onclick="menu.open('../contest_edit.php')" <?php if ($user->getPower() != 0) echo "style='display: none;'";?>>
                         <img src="img/dash.svg" />比赛管理
                     </div>
-                	<div class="item_parent" onclick="menu.open('../theme.php')">
+                	<div class="item_parent" onclick="menu.open('../theme.php')" <?php if ($user->getPower() != 0) echo "style='display: none;'";?>>
                         <img src="img/dash.svg" />主题管理
                     </div>
-                    <div class="item_parent" onclick="menu.toggle('#eassy')">
+                    <div class="item_parent" onclick="menu.toggle('#eassy')" <?php if ($user->getPower() != 0) echo "style='display: none;'";?>>
                         <img src="img/eassy.svg" />文章管理&nbsp;&nbsp;&nbsp;<font style="font-size: 15px;">∨</font>
                     </div>
                     <div id="eassy" style="display: none;">
