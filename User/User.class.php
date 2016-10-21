@@ -1,6 +1,6 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-01-31 10:07:09
+        Last modified: 2016-10-21 19:20:02
         Filename: User.class.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
@@ -149,7 +149,7 @@
 				$json = addslashes($json);
 			
 			mysql_query("INSERT INTO Users
-							VALUES ('".$user."', '".$pass."', ".$power.", '".time()."', '".$json."')", $sql);
+							VALUES ('".$user."', '".$pass."', ".$power.", '".time()."', '".$json."',  '')", $sql);
 			return true;
 		}
 		public function userRenew($user, $pass, $json, $power = 1)
