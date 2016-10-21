@@ -99,6 +99,19 @@ a.btn:hover {
    	height: 5px;
 	background-color: #55FF55;
 }
+#info {
+    width: 720px;
+    color: #fff;
+    border: 1px #434857 solid;
+    border-radius: 3px;
+    padding: 5px;
+    margin-top: 20px;
+}
+#info div {
+    border: 1px #434857 solid;
+    border-radius: 7px;
+    padding: 5px;
+}
 
 
 
