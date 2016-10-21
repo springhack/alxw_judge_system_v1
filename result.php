@@ -119,7 +119,7 @@
             </div>
             <div style='width:50%;'>
                 <legend>Compile Info:</legend>
-                <pre id='code' style='font-size:11px;white-space:pre-wrap;'><?php
+                <pre id='compile' style='font-size:11px;white-space:pre-wrap;'><?php
                     echo $res['compileinfo'];
                 ?></pre>
             </div>
