@@ -97,7 +97,7 @@
 						<?php
 					} else {
 						?><br /><br />
-							<a href='http://www.90its.cn/' target='_blank' class='btn'>访问Cello Studio团队</a><br /><br /><br />
+							<a href='http://www.dosk.win/' target='_blank' class='btn'>访问SpringHack博客</a><br /><br /><br />
 							<a href='http://github.com/springhack' target='_blank' class='btn'>帮助我改善这个项目</a>
 						<?php
 					}

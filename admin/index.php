@@ -96,7 +96,7 @@
                         <img src="img/setting.svg" />网站设置
                     </div>
                     <div class="item_bottom" onclick="javascript:document.getElementById('cello_link').click();">
-                    	<a href="http://www.90its.cn/" target="_blank" id="cello_link"></a>
+                    	<a href="http://www.dosk.win/" target="_blank" id="cello_link"></a>
                        	<img src="img/chrome.png" /> <font id="cello">Cello Studio</font>
                     </div>
                 </div>

@@ -472,7 +472,7 @@ input {
 				<table width="100%" border="0" cellpadding="0" cellspacing="5"
 					bgcolor="#EFEFEF">
 					<tr align="center">
-						<td><font size="3">Copyright (C) <?php echo date("Y"); ?> <a href="http://www.90its.cn/"><font size="5"
+						<td><font size="3">Copyright (C) <?php echo date("Y"); ?> <a href="http://www.dosk.win/"><font size="5"
 							color="red"><b>SpringHack</b></font></a> All Rights Reserved .</font></td>
 					</tr>
 					<tr>

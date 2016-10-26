@@ -28,5 +28,5 @@ $(function () {
 				'position' : 'relative'
 			});
 		$('center:first input[type=password]').addClass('mui-btn mui-btn--flat mui-btn--accent');
-		$(document.body).css('background-color', '#DDD').append('<center><a href="http://www.90its.cn/" target="_blank"><br />Design By SpringHack</a><br /><br /></center>');
+		$(document.body).css('background-color', '#DDD').append('<center><a href="http://www.dosk.win/" target="_blank"><br />Design By SpringHack</a><br /><br /></center>');
 	});

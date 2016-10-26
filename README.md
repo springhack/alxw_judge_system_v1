@@ -32,7 +32,7 @@ PS: GPL保证你可以合法忽略以上注意事项但不能保证你不受鄙�
 
 Linux新手请看鸟哥的私房菜http://vbird.dic.ksu.edu.tw/linux_basic/linux_basic.php
 
-目前维护者:	SpringHack	springhack@live.cn	http://blog.90its.cn/
+目前维护者:	SpringHack	springhack@live.cn	http://www.dosk.win/
 
 最新更新
 
@@ -70,9 +70,3 @@ Who Used the System
 
     沈阳航空航天大学 上线时间 2015年8月23日
 
-部分截图：
-![image](http://blog.90its.cn/img/Index.png)
-![image](http://blog.90its.cn/img/Login.png)
-![image](http://blog.90its.cn/img/Rank.png)
-![image](http://blog.90its.cn/img/Status.png)
-![image](http://blog.90its.cn/img/Panel.png)

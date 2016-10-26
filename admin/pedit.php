@@ -83,7 +83,7 @@
 				?></textarea><br />
             </form>
             <br />
-            Powered by <a href="http://www.90its.cn/" target="_blank">Cello Studio</a> Cpoyright&copy; 2014 - <?php echo date("Y"); ?>
+            Powered by <a href="http://www.dsok.win/" target="_blank">Cello Studio</a> Cpoyright&copy; 2014 - <?php echo date("Y"); ?>
             <br />
             <br />
             <br />

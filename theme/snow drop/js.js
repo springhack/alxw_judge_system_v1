@@ -10,7 +10,6 @@ $(function () {
 				if ($(this).attr("data-type") != "rank")
 					$(this).addClass("menu");
 			});
-		//$(document.body).append("<center><br /><h5><a href='http://www.90its.cn/' target='_blank' style='color: #000000;'>Designed by SpringHack in Cello Studio</a></h5></center>");
 		$('.navigator.contest').css('padding-bottom', '20px').parent().css('padding-bottom', '40px')
 		$(document.body).attr('id', 'particles-js');
 		$.getScript(//'theme/ACG/particles.min.js', 
