@@ -9,12 +9,21 @@ body {
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	background-size: 100% 100%;
+    margin-left: 250px !important;
 }
 body, div, img {
 	padding: 0px;
  	border: 0px;
 	margin: 0px;
 	font-family: "苹方", "Microsoft YaHei", "Comic Sans MS", "幼圆", "黑体", sans-serif;
+}
+.BBB {
+    margin-top: 20px;
+}
+@media screen and (max-width: 1455px) {
+    .BBB {
+        margin: 20px;
+    }
 }
 .navigator {
 	background-color: #FFF;
@@ -24,7 +33,6 @@ body, div, img {
     width: 250px;
     height: 100%;
     color: #fff;
-    padding-left: 10px;
 }
 .navigator h2 {
     color: #000;

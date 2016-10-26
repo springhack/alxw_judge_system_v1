@@ -36,10 +36,6 @@ $(function () {
 				$(this).appendTo(div);
 			});
 		$('table textarea').css('width', '100%');
-		$('center:first').addClass('mui-container mui-panel').css({
-            'backgroundColor' : '#fff',
-            'margin' : '20px',
-            'marginLeft' : '270px'
-		});
+		$('center:first').addClass('mui-container mui-panel BBB');
 		$('center:first input[type=password]').addClass('mui-btn mui-btn--flat mui-btn--accent');
 	});
