@@ -38,4 +38,21 @@ $(function () {
 		$('table textarea').css('width', '100%');
 		$('center:first').addClass('mui-container mui-panel BBB');
 		$('center:first input[type=password]').addClass('mui-btn mui-btn--flat mui-btn--accent');
+        if (/status.php/.test(location.href))
+            $('table font').each(function (index, item) {
+                switch (item.innerText)
+                {
+                    case 'Presentation Error':
+                        item.style.color = '#FFA500';
+                    break;
+                    case 'Accepted':
+                        item.style.color = '#00FF00';
+                    break;
+                    case 'Wrong Answer':
+                        item.style.color = '#FF0000';
+                    break;
+                    default:
+                    break;
+                }
+            });
 	});
