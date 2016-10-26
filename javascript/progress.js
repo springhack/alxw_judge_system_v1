@@ -30,6 +30,9 @@
 				});
                 code.html(json['code']);
                 compile.html(json['compileinfo']);
+                try {
+                    window.update();
+                } catch (e) {}
 			});
 			n.width(0);
 			n.animate({

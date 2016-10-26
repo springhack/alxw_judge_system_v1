@@ -41,7 +41,7 @@
 		$res['long'],
 		$res['lang'],
 		date("Y-M-D H:i:s", $res['time']),
-        'code' => $res['code'],
-        'compileinfo' => $res['compileinfo']
+        'code' => htmlspecialchars($res['code']),
+        'compileinfo' => htmlspecialchars($res['compileinfo'])
 	));
 ?>

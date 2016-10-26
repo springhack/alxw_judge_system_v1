@@ -114,13 +114,13 @@
             <div style='width:50%;'>
                 <legend>Code:</legend>
                 <pre id='code' style='font-size:11px;white-space:pre-wrap;'><?php
-                    echo $res['code'];
+                    echo htmlspecialchars($res['code']);
                 ?></pre>
             </div>
             <div style='width:50%;'>
                 <legend>Compile Info:</legend>
                 <pre id='compile' style='font-size:11px;white-space:pre-wrap;'><?php
-                    echo $res['compileinfo'];
+                    echo htmlspecialchars($res['compileinfo']);
                 ?></pre>
             </div>
         </div>
