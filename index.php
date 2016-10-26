@@ -49,6 +49,9 @@
     	<?php
 			$sstart = isset($_GET['page'])?(intval($_GET['page'])-1)*10:0;
 			require_once("api.php");
+            $ac = array();
+            if ($app->user->isLogin())
+                $ac = explode(' ', $app->user->getPlist());
 			if ($db->query("SHOW TABLES LIKE 'Problem'")->num_rows() != 1)
 			{
 				$db->struct(array(
@@ -69,12 +72,12 @@
 				for ($i=0;$i<count($ll);++$i)
 				{
 					$list = $db->from('Problem')->where("`id`='".$ll[$i]."'")->select()->fetch_one();
-					echo "<tr><td width='100'>".chr(intval($i) + 65)."</td><td width='500'><a href='view.php?cid=".$_GET['cid']."&id=".$list['id']."'>".$list['title']."</a></td></tr>";
+					echo "<tr><td width='100'>".chr(intval($i) + 65)."</td><td width='500'><a ".(in_array($ll[$i], $ac)?"class='ac'":"")."  href='view.php?cid=".$_GET['cid']."&id=".$list['id']."'>".$list['title']."</a></td></tr>";
 				}
 			} else {
 				$list = $db->from("Problem")->where("`hide`='no'")->limit(10, $sstart)->select()->fetch_all();
 				for ($i=0;$i<count($list);++$i)
-					echo "<tr><td width='100'>".$list[$i]['id']."</td><td width='500'><a href='view.php?id=".$list[$i]['id']."'>".$list[$i]['title']."</a></td></tr>";
+					echo "<tr><td width='100'>".$list[$i]['id']."</td><td width='500'><a ".(in_array($list[$i]['id'], $ac)?"class='ac'":"")." href='view.php?id=".$list[$i]['id']."'>".$list[$i]['title']."</a></td></tr>";
 			}
 			echo "</table>";
 		?><br /><br />
