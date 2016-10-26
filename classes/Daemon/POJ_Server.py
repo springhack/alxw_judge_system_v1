@@ -185,7 +185,9 @@ def Worker(item, oj_user, oj_pass, index):
 	# Get compile info
 	html = CurlGET("http://poj.org/showcompileinfo?solution_id=%s" % RunID, cookie)
 	c_info = re.findall(r'<font size=3>(.*)</font></p></ul>', html, re.S)
-	c_info = c_info[0].replace('<pre>', '').replace('</pre>', '')
+	c_info = c_info[0].replace('<pre>', '').replace('</pre>', '').strip()
+	if c_info == '&nbsp;':
+		c_info = ''
 	# Update result
 	db.run_sql("update Record set `rid`='%s',`memory`='%s',`long`='%s',`lang`='%s',`result`='%s',`compileinfo`='%s' where `id`='%s'" % (RunID, result[1], result[2], result[3], result[0], MySQLdb.escape_string(c_info), item[0]))
 	if result[0] == 'Accepted':
