@@ -15,7 +15,7 @@
 ### END INIT INFO
 
 # Author:   SpringHack
-# website:  http://ww.dosk.win/
+# website:  http://www.dosk.win/
 
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 NAME=alxwd
