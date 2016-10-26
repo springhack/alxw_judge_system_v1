@@ -49,6 +49,7 @@ $(function () {
                         item.style.color = '#00FF00';
                     break;
                     case 'Wrong Answer':
+                    case 'Compile Error':
                         item.style.color = '#FF0000';
                     break;
                     default:
