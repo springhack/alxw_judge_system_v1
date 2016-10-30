@@ -172,10 +172,10 @@
                 	<td data-type="rank">
                     	User Name
                     </td>
-                    <td width="40">
+                    <td data-type="rank" width="40" align="center">
                         Deal
                     </td>
-                    <td width="40">
+                    <td data-type="rank" width="40" align="center">
                         Time
                     </td>
                     <?php
