@@ -33,6 +33,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="refresh" content="30" />
         <title>Rank List</title>
     </head>
     <body>
@@ -171,6 +172,12 @@
                 	<td data-type="rank">
                     	User Name
                     </td>
+                    <td>
+                        Deal
+                    </td>
+                    <td>
+                        Time
+                    </td>
                     <?php
                     	for ($i=1;$i<=count(explode(',', $db->from("Contest")->where("`id`='".$_GET['cid']."'")->select("list")->fetch_one()['list']));++$i)
 							echo '<td data-type="rank" align="center" width="40">'.chr(64 + $i).'</td>';
@@ -180,6 +187,8 @@
                 	for ($i=0;$i<count($list);++$i)
 					{
 						echo '<tr data-type="rank"'.(($i%2)?' style="background-color: #CEFDFF;"':'').'><td data-type="rank" style=" border-bottom: 1px dotted #CCCCCC;" width="200">'.$list[$i]['user'].'</td>';
+						echo '<td data-type="rank" style=" border-bottom: 1px dotted #CCCCCC;" width="200">'.$list[$i]['deal'].'</td>';
+						echo '<td data-type="rank" style=" border-bottom: 1px dotted #CCCCCC;" width="200">'.$list[$i]['time'].'</td>';
 						foreach ($list[$i] as $key => $val)
 							if (!is_string($key))
 							{
