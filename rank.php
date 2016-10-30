@@ -166,7 +166,10 @@
 		?>
         <center>
         	<?php require_once("header.php"); ?>
+            <script src='javascript/FileSaver.js'></script>
+            <script src='javascript/XML.js'></script>
         	<h1>Rank List</h1>
+            <p><a hred='#' id='export' style='cursor: pointer;'>Export CSV</a></p>
     		<table data-type="rank">
             	<tr data-type="rank" style="color: #FFF; background-color: #0995C4;">
                 	<td data-type="rank">
