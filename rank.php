@@ -172,10 +172,10 @@
                 	<td data-type="rank">
                     	User Name
                     </td>
-                    <td>
+                    <td width="40">
                         Deal
                     </td>
-                    <td>
+                    <td width="40">
                         Time
                     </td>
                     <?php
@@ -187,8 +187,8 @@
                 	for ($i=0;$i<count($list);++$i)
 					{
 						echo '<tr data-type="rank"'.(($i%2)?' style="background-color: #CEFDFF;"':'').'><td data-type="rank" style=" border-bottom: 1px dotted #CCCCCC;" width="200">'.$list[$i]['user'].'</td>';
-						echo '<td data-type="rank" style=" border-bottom: 1px dotted #CCCCCC;" width="200">'.$list[$i]['deal'].'</td>';
-						echo '<td data-type="rank" style=" border-bottom: 1px dotted #CCCCCC;" width="200">'.$list[$i]['time'].'</td>';
+						echo '<td data-type="rank" align="center" style=" border-bottom: 1px dotted #CCCCCC;">'.$list[$i]['deal'].'</td>';
+						echo '<td data-type="rank" align="center" style=" border-bottom: 1px dotted #CCCCCC;">'.secToTime($list[$i]['time']).'</td>';
 						foreach ($list[$i] as $key => $val)
 							if (!is_string($key))
 							{
