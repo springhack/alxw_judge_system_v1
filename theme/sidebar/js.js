@@ -30,6 +30,12 @@ $(function () {
 		$('table').addClass('mui-table mui-panel').css('background-color', '#EEE');
 		$('table a').addClass('mui-btn mui-btn--accent');
 		$('input[type=submit]').addClass('mui-btn mui-btn--accent');
+		$('#search .item').addClass('mui-textfield mui-textfield--float-label').css({
+            'display' : 'inline-block',
+            'width' : '200px',
+            'position' : 'relative',
+            'top' : '1px'
+        });
 		$('select').each(function () {
 				var div = $('<div class="mui-select" style="width: 200px; display: inline-block;"></div>');
 				$(this).before(div);

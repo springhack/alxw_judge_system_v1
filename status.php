@@ -60,6 +60,30 @@
     	<center>
         <?php require_once("header.php"); ?>
         <h1>Problem Status List</h1>
+        <div id='search'>
+            <form method='get'>
+                <div class='item'>
+                    <input type='text' name='oid' /><label>Problem ID</label>
+                </div>
+                <div class='item'>
+                    <input type='text' name='user' /><label>User ID</label>
+                </div>
+                <select name='result'>
+                    <option value='-1'>All</option>
+                    <option value='9'>Waiting</option>
+                    <option value='0'>Accepted</option>
+                    <option value='8'>System Error</option>
+                    <option value='7'>Compile Error</option>
+                    <option value='5'>Runtime Error</option>
+                    <option value='4'>Wrong Answer</option>
+                    <option value='1'>Presentation Error</option>
+                    <option value='2'>Time Limit Exceeded</option>
+                    <option value='6'>Output Limit Exceeded</option>
+                    <option value='3'>Memory Limit Exceeded</option>
+                </select>
+                <input type='submit' value='Search' />
+            </form>
+        </div>
     	<table border="1">
         	<tr>
             	<td>
@@ -91,9 +115,32 @@
 				$start = isset($_GET['page'])?(intval($_GET['page'])-1)*10:0;
 				require_once('classes/Record.php');
 				$is_contest = false;
+                $rest_search = '';
+                $rest_result = array(
+                    'Accepted',
+                    'Presentation',
+                    'Time',
+                    'Memory',
+                    'Wrong',
+                    'Runtime',
+                    'Output',
+                    'Compile',
+                    'System',
+                    'Waiting'
+                );
+                if (isset($_GET['oid']))
+                    if(!empty($_GET['oid']) && is_numeric($_GET['oid']))
+                        $rest_search .= " and `oid`='".intval($_GET['oid'])."'";
+                if (isset($_GET['user']))
+                    if(!empty($_GET['user']))
+                        if ($app->user->str_check($_GET['user']))
+                            $rest_search .= " and `user`='".$_GET['user']."'";
+                if (isset($_GET['result']))
+                    if(is_numeric($_GET['result']) && intval($_GET['result']) >= 0 && intval($_GET['result']) <= 9)
+                        $rest_search .= " and binary `result` like '%".$rest_result[intval($_GET['result'])]."%'";
 				if (isset($_GET['cid']))
 				{
-					$arr = $db->from('Record')->where("`contest`='".intval($_GET['cid'])."'")->limit(10, $start)->order('DESC', 'time')->select('id')->fetch_all();
+					$arr = $db->from('Record')->where("`contest`='".intval($_GET['cid'])."'".$rest_search)->limit(10, $start)->order('DESC', 'time')->select('id')->fetch_all();
 					$contest_fix = $db->from('Contest')->where("`id`='".intval($_GET['cid'])."'")->select('list')->fetch_one();
 					if ($contest_fix)
 					{
@@ -104,7 +151,7 @@
 							$hash[$tmp_arr[$i]] = chr(65 + $i);
 					}
 				} else
-					$arr = $db->from('Record')->where("`contest`='0'")->limit(10, $start)->order('DESC', 'time')->select('id')->fetch_all();
+					$arr = $db->from('Record')->where("`contest`='0'".$rest_search)->limit(10, $start)->order('DESC', 'time')->select('id')->fetch_all();
 				for ($i=0;$i<count($arr);++$i)
 				{
 					$pro = new Record($arr[$i]['id']);
