@@ -112,6 +112,16 @@ a.btn:hover {
     border-radius: 7px;
     padding: 5px;
 }
+#search {
+    padding-bottom: 15px;
+}
+#search .item {
+    display: inline-block;
+    color: #fff;
+}
+#search input, #search select {
+    border-radius: 5px;
+}
 
 
 
