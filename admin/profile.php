@@ -11,7 +11,7 @@
 		if ($_POST['new'] != "")
 			if ($user->str_check($_POST['new']) && $user->getSalt($_POST['old']) == $user->getPass())
 			{
-				$flag = $user->userRenew($user->getUser(), $_POST['new'], "", $user->getPower());
+				$flag = $user->userRenew($user->getUser(), $user->getSalt($_POST['new']), "", $user->getPower());
 				if ($flag)
 					$alert = "修改成功!";
 				else

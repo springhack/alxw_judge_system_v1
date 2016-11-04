@@ -54,7 +54,7 @@
                     <td width="200">
                         账号
                     </td>
-                    <td width="200">
+                    <td width="250">
                         密码  
                     </td>
                     <td width="65">
