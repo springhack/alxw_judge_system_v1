@@ -1,7 +1,7 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-10-21 19:20:02
-        Filename: User.class.php
+        Last modified: 2016-11-04 15:25:15
+        Filename: User/User.class.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
 <?php
@@ -20,7 +20,9 @@
 						power int,
 						time text,
 						json longtext,
-                        plist longtext
+                        plist longtext,
+                        PRIMARY KEY (user(20)),
+                        INDEX (pass(20))
 					) DEFAULT CHARSET = UTF8; 
 				", $sql);
 			}
