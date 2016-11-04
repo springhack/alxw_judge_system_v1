@@ -82,6 +82,10 @@
                     <option value='6'>Output Limit Exceeded</option>
                     <option value='3'>Memory Limit Exceeded</option>
                 </select>
+                <?php
+                    if (isset($_GET['cid']) && is_numeric($_GET['cid']))
+                        echo '<input type=hidden name=cid value='.$_GET['cid'].' />';
+                ?>
                 <input type='submit' value='Search' />
             </form>
         </div>
@@ -119,14 +123,14 @@
                 $rest_search = '';
                 $rest_result = array(
                     'Accepted',
-                    'Presentation',
-                    'Time',
-                    'Memory',
-                    'Wrong',
-                    'Runtime',
-                    'Output',
-                    'Compile',
-                    'System',
+                    'Presentation Error',
+                    'Time Limit Exceeded',
+                    'Memory Limit Exceeded',
+                    'Wrong Answer',
+                    'Runtime Error',
+                    'Output Limit Exceeded',
+                    'Compile Error',
+                    'System Error',
                     'Waiting'
                 );
                 if (isset($_GET['oid']))
@@ -138,7 +142,7 @@
                             $rest_search .= " and `user`='".$_GET['user']."'";
                 if (isset($_GET['result']))
                     if(is_numeric($_GET['result']) && intval($_GET['result']) >= 0 && intval($_GET['result']) <= 9)
-                        $rest_search .= " and binary `result` like '%".$rest_result[intval($_GET['result'])]."%'";
+                        $rest_search .= " and binary `result`='".$rest_result[intval($_GET['result'])]."'";
 				if (isset($_GET['cid']))
 				{
 					$arr = $db->from('Record')->where("`contest`='".intval($_GET['cid'])."'".$rest_search)->limit(10, $start)->order('DESC', 'time')->select('id')->fetch_all();
