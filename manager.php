@@ -40,12 +40,7 @@
 		$pro = new Problem($_POST['pid'], $_POST['oj']);
 		$pro_info = $pro->getInfo();
 		$db = new MySQL();
-		$num = $db->from("Problem")
-					->select("max(cast(id as signed))")
-					->fetch_one();
-		//Just a hack for PHP <= 5.3
 		$db->value(array(
-				'id' => intval($num['max(cast(id as signed))']) + 1,
 				'pid' => $_POST['pid'],
 				'title' => get_magic_quotes_gpc()?$pro_info['title']:addslashes($pro_info['title']),
 				'oj' => $_POST['oj'],
@@ -65,6 +60,27 @@
 		$app->setting->set("startTime", time());
 		$app->setting->set("endTime", time());
 		$alert = "我都忘了耶~!";
+	}
+	if (isset($_POST['rejudge']))
+	{
+        $w = '';
+        if (isset($_POST['pid']) && is_numeric($_POST['pid']))
+            $w .= "`oid`='".$_POST['pid']."'";
+        if (isset($_POST['cid']) && is_numeric($_POST['cid']))
+            if ($w != '')
+                $w .= " and `contest`='".$_POST['cid']."'";
+            else
+                $w .= "`contest`='".$_POST['cid']."'";
+        if ($w == '')
+		    $alert = "没有筛选条件，啥也没干咯～!";
+        else {
+    		$db = new MySQL();
+            $db->set(array(
+                'rid' => '__',
+                'result' => 'Rejudge'
+            ))->where($w)->update('Record');
+		    $alert = "嗯，已经开始Rejudge了～!";
+        }
 	}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -87,7 +103,10 @@
                     	<h2>Add Problem</h2>
                     </td>
                     <td align="center" style="padding: 10px;">
-                    	<h2>Clean System</h2>
+                    	<h2>Rejudge</h2>
+                    </td>
+                    <td align="center" style="padding: 10px;">
+                    	<h2 style='color:#f00;'>Clean System</h2>
                     </td>
                 </tr>
                 <tr>
@@ -107,7 +126,18 @@
                     </td>
                     <td align="center" style="padding: 10px;">
                     	<form action="manager.php" method="post">
-                        	<input type="submit" name="clean" value="一切皆忘,初始化系统" />
+                            Problem: <input type='text' name='pid' /><br /><br />
+                            Contest: <input type='text' name='cid' /><br /><br />
+                        	<input type="submit" name="rejudge" value="重新来过" />
+                        </form>
+                    </td>
+                    <td align="center" style="padding: 10px;">
+                    	<form action="manager.php" method="post">
+                            <font style='color:#f00;'>药效强烈，提神醒脑!</font>
+                            <br />
+                        	<input type="submit" name="clean" value="一切皆忘,初始化系统" style='background-color:#f00;color:#fff;' />
+                            <br />
+                            <font style='color:#f00;'>副作用强，建议慎用!</font>
                         </form>
                     </td>
                 </tr>

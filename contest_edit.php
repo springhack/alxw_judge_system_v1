@@ -24,12 +24,7 @@
 		} else {
 			if (!empty($_POST['title']))
 			{	
-				$num = $db->from("Contest")
-						->select("max(cast(id as signed))")
-						->fetch_one();
-				//Just a hack for PHP <= 5.3
 				$db->value(array(
-					'id' => intval($num['max(cast(id as signed))']) + 1,
 					'title' => get_magic_quotes_gpc()?$_POST['title']:addslashes($_POST['title']),
 					'list' => get_magic_quotes_gpc()?$_POST['list']:addslashes($_POST['list']),
 					'password' => get_magic_quotes_gpc()?$_POST['password']:addslashes($_POST['password']),

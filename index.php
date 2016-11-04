@@ -55,7 +55,7 @@
 			if ($db->query("SHOW TABLES LIKE 'Problem'")->num_rows() != 1)
 			{
 				$db->struct(array(
-						'id' => 'text',
+						'id' => 'int primary key not null auto_increment',
 						'pid' => 'text',
 						'title' => 'text',
 						'oj' => 'text',

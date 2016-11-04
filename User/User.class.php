@@ -120,11 +120,11 @@
 		{
 			global $sql;
 			$result = mysql_query("SELECT * FROM Users 
-									WHERE user = '".$user."' AND pass = '".$pass."'", $sql);
+									WHERE user = '".$user."' AND pass = '".$this->getSalt($pass)."'", $sql);
 			while($row = mysql_fetch_array($result))
 			{
 				$_SESSION['user'] = $user;
-				$_SESSION['pass'] = $pass;
+				$_SESSION['pass'] = $this->getSalt($pass);
 				return true;
 				break;
 			}
@@ -149,9 +149,13 @@
 				$json = addslashes($json);
 			
 			mysql_query("INSERT INTO Users
-							VALUES ('".$user."', '".$pass."', ".$power.", '".time()."', '".$json."',  '')", $sql);
+							VALUES ('".$user."', '".$this->getSalt($pass)."', ".$power.", '".time()."', '".$json."',  '')", $sql);
 			return true;
 		}
+        public function getSalt($str)
+        {
+            return md5('SpringHack is yor GOD right ?'.$str);
+        }
 		public function userRenew($user, $pass, $json, $power = 1)
 		{
 			global $sql;
@@ -161,7 +165,7 @@
 				$json = addslashes($json);
 			while($row = mysql_fetch_array($result))
 			{
-				mysql_query("UPDATE Users SET pass = '".$pass."', power = ".$power.", json = '".$json."'
+				mysql_query("UPDATE Users SET pass = '".$this->getSalt($pass)."', power = ".$power.", json = '".$json."'
 								WHERE user = '".$user."'", $sql);
 				$_SESSION['pass'] = $pass;
 				return true;

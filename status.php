@@ -24,9 +24,10 @@
 				'oj_u' => 'text',
 				'oj_p' => 'text',
 				'code' => 'longtext',
-				'contest' => 'text',
+				'contest' => 'int',
                 'compileinfo' => 'longtext'
 			))->create("Record");
+        $db->query('ALTER TABLE `Record` ADD INDEX(oid(20)),ADD INDEX(rid(20)),ADD INDEX(tid(20)),ADD INDEX(user(20)),ADD INDEX(result(32)),ADD INDEX(oj(11)),ADD INDEX(contest)');
 	}
 	if (isset($_GET['cid']))
 	{

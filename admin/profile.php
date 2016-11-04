@@ -9,7 +9,7 @@
 	if (isset($_POST['old']) && isset($_POST['new']))
 	{
 		if ($_POST['new'] != "")
-			if ($user->str_check($_POST['new']) && $_POST['old'] == $user->getPass())
+			if ($user->str_check($_POST['new']) && $user->getSalt($_POST['old']) == $user->getPass())
 			{
 				$flag = $user->userRenew($user->getUser(), $_POST['new'], "", $user->getPower());
 				if ($flag)

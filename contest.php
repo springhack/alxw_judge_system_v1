@@ -21,7 +21,7 @@
 			if ($db->query("SHOW TABLES LIKE 'Contest'")->num_rows() != 1)
 			{
 				$db->struct(array(
-						'id' => 'text',
+						'id' => 'int primary key not null auto_increment',
 						'title' => 'text',
 						'list' => 'text',
 						'time_s' => 'text',
