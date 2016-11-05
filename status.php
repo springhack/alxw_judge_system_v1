@@ -170,15 +170,25 @@
                 	<?php echo $res['user']; ?>
                 </td>
                 <td>
+                    <font style='color:#1976D2;text-decoration:underline;cursor:pointer;' onclick="javascript:location.href='view.php?id=<?php
+                        echo $res['oid'];
+                        if ($is_contest)
+                            echo '&cid='.$_GET['cid'];
+                    ?>'"> 
                 	<?php
 						if($is_contest)
 							echo $hash[$res['oid']];
 						else
 							echo $res['oid'];
 					?>
+                    </font>
                 </td>
                 <td>
-                	<font style='color:#1976D2;text-decoration:underline;cursor:pointer;' onclick="javascript:location.href='result.php?id=<?php echo $res['id']; ?>'"><?php echo $res['result']; ?></font>
+                	<font style='color:#1976D2;text-decoration:underline;cursor:pointer;' onclick="javascript:location.href='result.php?id=<?php
+                        echo $res['id'];
+                        if ($is_contest)
+                            echo '&cid='.$_GET['cid'];
+                    ?>'"><?php echo $res['result']; ?></font>
                 </td>
                 <td>
                 	<?php echo $res['memory']; ?>

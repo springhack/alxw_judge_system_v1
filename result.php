@@ -84,7 +84,7 @@
                 </td>
                 <td>
                 	<?php
-						if ($is_contest)
+						if($is_contest)
 							echo $hash[$res['oid']];
 						else
 							echo $res['oid'];
