@@ -1,5 +1,5 @@
-# AlxwVJ
-An opensource virtual judge system base on skvj.
+# Alxw Judge System
+An opensource online & virtual judge system base on skvj.
 ======
 
 AlxwVJ is an GPL FreeSoftware.
