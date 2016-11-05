@@ -117,7 +117,7 @@
                 </td>
             </tr>
             <?php
-				$start = isset($_GET['page'])?(intval($_GET['page'])-1)*10:0;
+				$start = isset($_GET['page'])?(intval($_GET['page'])-1)*$Config['STATUS_NUMBER_PER_PAGE']:0;
 				require_once('classes/Record.php');
 				$is_contest = false;
                 $rest_search = '';
@@ -145,7 +145,7 @@
                         $rest_search .= " and binary `result`='".$rest_result[intval($_GET['result'])]."'";
 				if (isset($_GET['cid']))
 				{
-					$arr = $db->from('Record')->where("`contest`='".intval($_GET['cid'])."'".$rest_search)->limit(10, $start)->order('DESC', 'time')->select('id')->fetch_all();
+					$arr = $db->from('Record')->where("`contest`='".intval($_GET['cid'])."'".$rest_search)->limit($Config['STATUS_NUMBER_PER_PAGE'], $start)->order('DESC', 'time')->select('id')->fetch_all();
 					$contest_fix = $db->from('Contest')->where("`id`='".intval($_GET['cid'])."'")->select('list')->fetch_one();
 					if ($contest_fix)
 					{
@@ -156,7 +156,7 @@
 							$hash[$tmp_arr[$i]] = chr(65 + $i);
 					}
 				} else
-					$arr = $db->from('Record')->where("`contest`='0'".$rest_search)->limit(10, $start)->order('DESC', 'time')->select('id')->fetch_all();
+					$arr = $db->from('Record')->where("`contest`='0'".$rest_search)->limit($Config['STATUS_NUMBER_PER_PAGE'], $start)->order('DESC', 'time')->select('id')->fetch_all();
 				for ($i=0;$i<count($arr);++$i)
 				{
 					$pro = new Record($arr[$i]['id']);

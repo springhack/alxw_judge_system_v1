@@ -11,7 +11,9 @@
 			'DB_PASS' => 'sksks',
 			'DB_NAME' => 'build_vj',
 			'AUTO_USER' => 'root',
-			'AUTO_PASS' => 'sksks'
+			'AUTO_PASS' => 'sksks',
+            'PROBLEM_NUMBER_PER_PAGE' => 20,
+            'STATUS_NUMBER_PER_PAGE' => 10
 		);
 	$sql = NULL;
 	function __autoload($class)

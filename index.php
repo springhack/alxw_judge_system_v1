@@ -47,7 +47,7 @@
         	<?php require_once("header.php"); ?>
         	<h1>Problems List</h1>
     	<?php
-			$sstart = isset($_GET['page'])?(intval($_GET['page'])-1)*10:0;
+			$sstart = isset($_GET['page'])?(intval($_GET['page'])-1)*$Config['PROBLEM_NUMBER_PER_PAGE']:0;
 			require_once("api.php");
             $ac = array();
             if ($app->user->isLogin())
@@ -75,7 +75,7 @@
 					echo "<tr><td width='100'>".chr(intval($i) + 65)."</td><td width='500'><a ".(in_array($ll[$i], $ac)?"class='ac'":"")."  href='view.php?cid=".$_GET['cid']."&id=".$list['id']."'>".$list['title']."</a></td></tr>";
 				}
 			} else {
-				$list = $db->from("Problem")->where("`hide`='no'")->limit(10, $sstart)->select()->fetch_all();
+				$list = $db->from("Problem")->where("`hide`='no'")->limit($Config['PROBLEM_NUMBER_PER_PAGE'], $sstart)->select()->fetch_all();
 				for ($i=0;$i<count($list);++$i)
 					echo "<tr><td width='100'>".$list[$i]['id']."</td><td width='500'><a ".(in_array($list[$i]['id'], $ac)?"class='ac'":"")." href='view.php?id=".$list[$i]['id']."'>".$list[$i]['title']."</a></td></tr>";
 			}

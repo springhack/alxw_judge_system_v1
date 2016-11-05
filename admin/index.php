@@ -39,8 +39,6 @@
         <div id="container">
         	<div id="navigator">
             	<div id="nav_left" <?php if ($user->getPower() != 0) echo "style='display: none;'";?>>
-                	<a href="#" title="新建文章" onclick="menu.open('eedit.php?id=new')"><img src="img/edit.png" /></a>
-                    <a href="#" title="新建页面" onclick="menu.open('pedit.php?n=new')"><img src="img/page.png" /></a>
                     <a href="#" title="网站属性" onclick="menu.open('config.php')"><img src="img/config.png" /></a>
                     <a href="#" title="网站设置" onclick="menu.open('setting.php')"><img src="img/setting.png" /></a>
                 </div>
@@ -64,21 +62,6 @@
                     </div>
                 	<div class="item_parent" onclick="menu.open('../theme.php')" <?php if ($user->getPower() != 0) echo "style='display: none;'";?>>
                         <img src="img/dash.svg" />主题管理
-                    </div>
-                    <div class="item_parent" onclick="menu.toggle('#eassy')" <?php if ($user->getPower() != 0) echo "style='display: none;'";?>>
-                        <img src="img/eassy.svg" />文章管理&nbsp;&nbsp;&nbsp;<font style="font-size: 15px;">∨</font>
-                    </div>
-                    <div id="eassy" style="display: none;">
-                        <div class="item_children" onclick="menu.open('eedit.php?id=new')">创建文章</div>
-                        <div class="item_children" onclick="menu.open('etype.php')" <?php if ($user->getPower() != 0) echo "style='display: none;'";?>>文章分类</div>
-                        <div class="item_children" onclick="menu.open('eassy.php')">文章列表</div>
-                    </div>
-                    <div class="item_parent" onclick="menu.toggle('#page')" <?php if ($user->getPower() != 0) echo "style='display: none;'";?>>
-                        <img src="img/page.svg" />页面管理&nbsp;&nbsp;&nbsp;<font style="font-size: 15px;">∨</font>
-                    </div>
-                    <div id="page" style="display: none;">
-                        <div class="item_children" onclick="menu.open('pedit.php?n=new')">创建页面</div>
-                        <div class="item_children" onclick="menu.open('page.php')">页面列表</div>
                     </div>
                     <div class="item_parent" onclick="menu.open('user.php')" <?php if ($user->getPower() != 0) echo "style='display: none;'";?>>
                         <img src="img/user.svg" />用户管理

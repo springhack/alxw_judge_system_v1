@@ -29,6 +29,8 @@
 			} else {
 				if (isset($_POST['submit']))
 				{
+                    if (isset($_POST['vcode']) && $_SESSION['vcode'] == md5($_POST['vcode']))
+                    {
 					if (!$user->user_pass_check($_POST['user'], $_POST['pass']))
 					{
 						$alert = "注册失败，账号密码不符合要求";
@@ -40,6 +42,8 @@
 						$return = true;
 					} else
 						$alert = "注册失败!";
+                    }
+                    else $alert = "注册失败,验证码不符!";
 				}
 			}
 		break;
@@ -52,6 +56,8 @@
 		case "login":
 			if (isset($_POST['submit']))
 			{
+                if (isset($_POST['vcode']) && $_SESSION['vcode'] == md5($_POST['vcode']))
+                {
 				if (!$user->user_pass_check($_POST['user'], $_POST['pass']))
 				{
 					$alert = "登录失败，账号密码不符合要求";
@@ -63,6 +69,7 @@
 					$return = true;
 				} else
 					$alert = "登录失败!";
+                } else $alert = "登录失败,验证码不符!";
 			}
 		break;
 	}
@@ -89,7 +96,9 @@
                     <form action="status.php?action=login&url=<?php echo $url; ?>" method="post">
                     账号:&nbsp;<input type="text" name="user" /><br /><br />
                     密码:&nbsp;<input type="password" name="pass" /><br /><br />
-                    <div style="text-align: right;">
+                    <div style="text-align: right;" id='vcan_1'>
+                        <input type="text" name="vcode" style='width:100px;text-align:center;padding:3px;float:left;margin:5px;' />
+                        <img src='vcode.php' onclick="this.src='vcode.php?'+Math.random()" style='float:left;margin:5px;' id='vcode' />
                     	<input type="submit" name="submit" value="登录" />
                     </div><hr />
                     </form>
@@ -106,7 +115,8 @@
                     账号:&nbsp;<input type="text" name="user" /><br /><br />
                     密码:&nbsp;<input type="password" name="pass" id="pass" /><br /><br />
                     重复:&nbsp;<input type="password" name="check" id="check" onkeyup="javascript:deal();" /><br /><br />
-                    <div style="text-align: right;">
+                    <div style="text-align: right;" id='vcan_2'>
+                        <input type="text" name="vcode" style='width:100px;text-align:center;padding:3px;float:left;margin:5px;' />
                     	<input type="submit" name="submit" value="注册" />
                     </div><hr />
                     </form>
