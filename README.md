@@ -16,15 +16,18 @@ PS: GPL保证你可以合法忽略以上注意事项但不能保证你不受鄙�
 
     快速安装指南：
     1、安装Ubuntu
-    2、执行如下命令(仅示范lapm架构,vim以开启apache2的mod_rewrite,建议配置成lnmp架构)
-        sudo apt-get update
-        sudo apt-get install git apache2 mysql-server php5 php5-curl php5-mysql
-        sudo a2enmod rewrite
-        service apache2 restart
-		vim /etc/apache2/apache2.conf
-        sudo git clone https://github.com/springhack/alxwvj.git /var/www/html/alxwvj
-        cd /var/www/html/alxwvj/classes/
-		sudo php Server.php start  (alxwd需要配置,配置完成手动复制到/etc/init.d/alxwd)
+    2、新方案：
+      Git克隆项目 https://github.com/springhack/alxw_judge_system_install 并进入执行 Install.sh
+    3、旧方案：
+      执行如下命令(仅示范lapm架构,vim以开启apache2的mod_rewrite,建议配置成lnmp架构)~~
+          sudo apt-get update
+          sudo apt-get install git apache2 mysql-server php5 php5-curl php5-mysql
+          sudo a2enmod rewrite
+          service apache2 restart
+          vim /etc/apache2/apache2.conf
+          sudo git clone https://github.com/springhack/alxwvj.git /var/www/html/alxwvj
+          cd /var/www/html/alxwvj/classes/
+          sudo php Server.php start  (alxwd需要配置,配置完成手动复制到/etc/init.d/alxwd)
     3、安装后访问服务器80端口上的Web服务alxwvj目录进行初始化安装
         例如 w3m http://localhost/alxwvj
         
@@ -32,13 +35,17 @@ PS: GPL保证你可以合法忽略以上注意事项但不能保证你不受鄙�
 
 Linux新手请看鸟哥的私房菜http://vbird.dic.ksu.edu.tw/linux_basic/linux_basic.php
 
-目前维护者:	SpringHack	springhack@live.cn	http://www.dosk.win/
+目前维护者:	SpringHack	springhack#live.cn	http://www.dosk.win/
 
 最新更新
 
+    添加了Rejudge功能
+    完善比赛功能
+    添加了编译信息显示
+    修改了核心评测机制
     修改了一套主题2333
     修复Installation流程
-	基本兼容PHP7(Test on lnmp, php version 7.0.6)
+    基本兼容PHP7(Test on lnmp, php version 7.0.6)
     修复不在classes目录不能启动的问题
     修复路径问题导致的图片不显示
     移动守护进程配置文件到Web根目录, Config.Daemon.php
@@ -63,8 +70,6 @@ AlxwVJ特性
     管理员可以完全通过Web平台添加题目，包括测试数据也可以同时添加。
     极低的系统需求，曾在AR9331/64M/16M的路由器上无故障运行。
     原生支持64位系统 amd64/x86-64bit
-
-Who Used the System
 
 发源地：
 
