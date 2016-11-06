@@ -13,6 +13,8 @@
 		{
 			//MySQL
 			$this->db = new MySQL();
+            $user = $_SESSION['user'];
+            $this->db->query("update Users set su=su+1 where user='$user'");
 			require_once(dirname(__FILE__)."/".$oj."_DataPoster.php");
 			$str = $oj."_DataPoster";
 			$this->poster = new $str("skvj01", "forskvj", $id, $lang, $code, $cid);

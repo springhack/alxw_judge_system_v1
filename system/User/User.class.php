@@ -21,8 +21,12 @@
 						time text,
 						json longtext,
                         plist longtext,
+                        ac int,
+                        su int,
                         PRIMARY KEY (user(20)),
-                        INDEX (pass(20))
+                        INDEX (pass(20)),
+                        INDEX (ac),
+                        INDEX (su)
 					) DEFAULT CHARSET = UTF8; 
 				", $sql);
 			}

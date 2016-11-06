@@ -193,7 +193,7 @@ def Worker(item, oj_user, oj_pass, index):
 	if result[0] == 'Accepted':
 		t_res = db.run_sql("select distinct oid from Record where `user`='%s' and result='Accepted'" % item[4])
 		t_res = map(lambda ptr:ptr[0], t_res)
-		db.run_sql("update Users set `plist`='%s' where `user`='%s'" % (' '.join(t_res), item[4]))
+		db.run_sql("update Users set `plist`='%s',`ac`='%d' where `user`='%s'" % (' '.join(t_res), len(t_res), item[4]))
 		Log('[I] => Solved problem list updated')
 	ExitThread(index, cookie)
 	thread.exit_thread()
