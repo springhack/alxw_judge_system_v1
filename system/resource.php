@@ -7,9 +7,9 @@
 <?php
 
 	if (!file_exists('theme/js'))
-		file_put_contents('theme/js', file_get_contents('theme/default/js.js'));
+		file_put_contents('theme/js', file_get_contents('theme/sidebar/js.js'));
 	if (!file_exists('theme/css'))
-		file_put_contents('theme/css', file_get_contents('theme/default/css.css'));
+		file_put_contents('theme/css', file_get_contents('theme/sidebar/css.css'));
 
 	if (isset($_GET['type']))
 	{

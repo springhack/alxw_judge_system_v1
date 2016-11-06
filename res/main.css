@@ -1,0 +1,108 @@
+body, div, img {
+    padding: 0px;
+     border: 0px;
+    margin: 0px;
+    font-family: "苹方", "Microsoft YaHei", "Comic Sans MS", "幼圆", "黑体", sans-serif;
+}
+body {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    padding: 20px;
+    padding-left: 40px;
+    background: #000 url(maccode.jpg) no-repeat;
+    background-size: 100%;
+    color: #fff;
+    overflow: hidden;
+}
+body h1 {
+    display: inline-block;
+}
+body a {
+    color: #fff;
+    text-decoration: none;
+}
+body a:hover {
+    color: #fff;
+}
+.center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.center .item font {
+    font-size: 40px;
+}
+.center .item {
+    cursor: pointer;
+    position: absolute;
+    text-align: center;
+    top: calc(50% - 50px);
+    animation: appear 1s;
+    transition: all .5s;
+}
+.center .item:hover {
+    color: #000;
+}
+.center .bottom {
+    padding-top: 20px;
+    position: absolute;
+    text-align: center;
+    bottom : 20px;
+}
+.center .bottom font {
+    animation: retop .5s infinite;
+    animation-direction: alternate;
+    position: relative;
+    top: 0px;
+}
+.exit {
+    animation: exit .7s;
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    z-index: 10;
+    background-color: #fff;
+    width: 20px;
+    height: 20px;
+    content: '&nbsp;';
+    border-radius: 10px;
+    opacity: 0;
+}
+@keyframes appear {
+    0% {
+        top: calc(100% + 100px);
+        color: #fff;
+    }
+    70% {
+        color: #000;
+    }
+    100% {
+        top: calc(50% - 50px);
+        color: #fff;
+    }
+}
+@keyframes retop {
+    from {
+        top: 0px;
+        color: #fff;
+    }
+    to {
+        top: -10px;
+        color: #000;
+    }
+}
+@keyframes exit {
+    from {
+        transform: scale(.2);
+        opacity: 0.6;
+    }
+    to {
+        transform: scale(100);
+        opacity: 0;
+    }
+}

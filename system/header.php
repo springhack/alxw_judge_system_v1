@@ -9,7 +9,7 @@
 			<link rel="stylesheet" href="resource.php?type=css" type="text/css" />
 			<div class='header'>
 				<div class='navigator<?php echo isset($_GET['cid'])?' contest':''; ?>'>
-						<h2 style='display: inline-block;'><?php
+						<h2 style='display: inline-block;cursor: pointer;' onclick="location.href='..'"><?php
                         	require_once("api.php");
 							if (isset($_GET['cid']))
 							{
@@ -22,7 +22,7 @@
 								echo '</h2><font style=\'display: inline-block; width: 100px;\'>&nbsp;</font>';
 							}
 						?>
-                    	<a href="index.php">首页</a><font style='display: inline-block; width: 40px;'>&nbsp;</font>
+                    	<a href="index.php">题册</a><font style='display: inline-block; width: 40px;'>&nbsp;</font>
 						<?php if (!isset($_GET['cid'])) { ?>
                     	<a href="contest.php">比赛</a><font style='display: inline-block; width: 40px;'>&nbsp;</font>
                     	<a href="status.php">状态</a><font style='display: inline-block; width: 40px;'>&nbsp;</font>
@@ -39,11 +39,9 @@
 						?>
             	</div>
 				<?php
-					if (!strstr($_SERVER['SCRIPT_NAME'], 'index.php'))
-					{
 						require_once('linux.php');
 						$sys = sys_linux();
-						?>
+			    ?>
 							<style>
 								.bar {
 									width: 500px;
@@ -94,12 +92,4 @@
 									</td>
 								</tr>
 							</table>	
-						<?php
-					} else {
-						?><br /><br />
-							<a href='http://www.dosk.win/' target='_blank' class='btn'>访问SpringHack博客</a><br /><br /><br />
-							<a href='http://github.com/springhack' target='_blank' class='btn'>帮助我改善这个项目</a>
-						<?php
-					}
-				?>
 			</div>

@@ -6,7 +6,7 @@
 **/ ?>
 <?php
 
-	require_once(dirname(__FILE__).'/../Config.Daemon.php');
+	require_once(dirname(__FILE__).'/../../Config.Daemon.php');
 
 	chdir(dirname(__FILE__));
 

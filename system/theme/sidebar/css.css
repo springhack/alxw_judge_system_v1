@@ -5,10 +5,11 @@
         Description: Created by SpringHack using vim automatically.
 **/
 body {
-	background-image: url(theme/default/md_back.png);
+	background-image: url(theme/sidebar/md_back.png);
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	background-size: 100% 100%;
+    margin-left: 250px !important;
 }
 body, div, img {
 	padding: 0px;
@@ -16,8 +17,31 @@ body, div, img {
 	margin: 0px;
 	font-family: "苹方", "Microsoft YaHei", "Comic Sans MS", "幼圆", "黑体", sans-serif;
 }
+.ac {
+    background-color: #0F0 !important;
+}
+.BBB {
+    margin-top: 20px;
+}
+@media screen and (max-width: 1455px) {
+    .BBB {
+        margin: 20px;
+    }
+}
+.navigator {
+	background-color: #FFF;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 250px;
+    height: 100%;
+    color: #fff;
+}
+.navigator h2 {
+    color: #000;
+}
 .navigator a {
-	color: #FFF;
+    display: block;
 }
 #progress {
 	width: 100%;
@@ -30,4 +54,11 @@ body, div, img {
 	width: 0px;
 	height: 5px;
 	background-color: #55FF55;
+}
+#info pre {
+    border: 1px #DDD solid;
+    height: 100%;
+    margin: 3px;
+    padding: 7px;
+    border-radius: 3px;
 }

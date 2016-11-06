@@ -19,6 +19,6 @@
 
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 NAME=alxwd
-NGINX_BIN=/home/wwwroot/default/classes/Server.php
+ALXW_BIN=/var/www/html/alxwvj/system/classes/Server.php
 
-php $NGINX_BIN $@
+php $ALXW_BIN $@

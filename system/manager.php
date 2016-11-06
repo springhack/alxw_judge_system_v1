@@ -116,7 +116,7 @@
                             <label>Problem OJ:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                             <select name="oj">
 								<?php
-									require_once('Config.Daemon.php');
+									require_once('../Config.Daemon.php');
 									for ($i=0;$i<count($conf['OJ_LIST']);++$i)
 										echo '<option value="'.$conf['OJ_LIST'][$i].'">'.$conf['OJ_LIST'][$i].'</option>';
 								?>

@@ -18,7 +18,7 @@
 	$sql = NULL;
 	function __autoload($class)
 	{
-		$file = dirname(__FILE__)."/".$class."/".$class.".class.php";
+		$file = dirname(__FILE__)."/system/".$class."/".$class.".class.php";
 		if (file_exists($file))
 			require_once($file);
 		else
@@ -31,6 +31,6 @@
 	}
 
 	if (!function_exists('mysql_connect'))
-		require_once('mysql_mysqli.php');
+		require_once('system/mysql_mysqli.php');
 
 ?>

@@ -5,7 +5,7 @@
         Description: Created by SpringHack using vim automatically.
 **/ ?>
 <?php
-	require_once(dirname(__FILE__)."/Config.php");
+	require_once(dirname(__FILE__)."/../Config.php");
 	class App {
 		private $version = "beta v0.1";
 		public $plugin = NULL;
