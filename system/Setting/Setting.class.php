@@ -18,6 +18,7 @@
 						'key' => 'text',
 						'val' => 'longtext'
 					))->create("Setting");
+                $this->db->query('alter table Setting add primary key(`key`(32))');
 			}
 		}
 		public function set($key, $val)
