@@ -32,9 +32,6 @@ body a:hover {
     flex-direction: column;
     align-items: center;
 }
-.center .item font {
-    font-size: 40px;
-}
 .center .item {
     cursor: pointer;
     position: absolute;
@@ -42,15 +39,20 @@ body a:hover {
     top: calc(50% - 50px);
     animation: appear 1s;
     transition: all .5s;
+    width: 100%;
 }
 .center .item:hover {
     color: #000;
+}
+.center .item font {
+    font-size: 40px;
 }
 .center .bottom {
     padding-top: 20px;
     position: absolute;
     text-align: center;
     bottom : 20px;
+    width: 100%;
 }
 .center .bottom font {
     animation: retop .5s infinite;
