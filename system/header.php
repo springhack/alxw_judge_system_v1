@@ -1,7 +1,7 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-05-02 19:33:13
-        Filename: ../header.php
+        Last modified: 2016-11-07 10:57:57
+        Filename: header.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
 			<script language="javascript" src="javascript/jquery-2.1.3.min.js"></script>
@@ -26,6 +26,7 @@
 						<?php if (!isset($_GET['cid'])) { ?>
                     	<a href="contest.php">比赛</a><font style='display: inline-block; width: 40px;'>&nbsp;</font>
                     	<a href="status.php">状态</a><font style='display: inline-block; width: 40px;'>&nbsp;</font>
+                    	<a href="top.php">榜单</a><font style='display: inline-block; width: 40px;'>&nbsp;</font>
 						<?php } else { ?>
                     	<a href="index.php<?php echo isset($_GET['cid'])?'?cid='.$_GET['cid']:''; ?>">题目</a><font style='display: inline-block; width: 40px;'>&nbsp;</font>
                     	<a href="rank.php<?php echo isset($_GET['cid'])?'?cid='.$_GET['cid']:''; ?>">排名</a><font style='display: inline-block; width: 40px;'>&nbsp;</font>
