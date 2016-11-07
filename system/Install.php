@@ -13,7 +13,7 @@
 	mysql_select_db($Config['DB_NAME'], $sql);
 	mysql_query("SET NAMES utf8", $sql);
 	$app->user = new User();
-	$app->user->userRegister($Config['AUTO_USER'], $app->user->getSalt($Config['AUTO_PASS']), "", 0);
+	$app->user->userRegister($Config['AUTO_USER'], $app->user->getSalt($Config['AUTO_PASS']), 'a:1:{s:5:"quote";s:0:"";}', 0);
 	if (!file_put_contents(".install", "Cello Studio"))
 		die('Can\'t write file !');
 	die("<center>Step 1 finished.<br />

@@ -155,7 +155,7 @@
 				$json = addslashes($json);
 			
 			mysql_query("INSERT INTO Users
-							VALUES ('".$user."', '".$pass."', ".$power.", '".time()."', '".$json."',  '')", $sql);
+							VALUES ('".$user."', '".$pass."', ".$power.", '".time()."', '".$json."',  '', 0, 0)", $sql);
 			return true;
 		}
         public function getSalt($str)
