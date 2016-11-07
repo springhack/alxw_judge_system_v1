@@ -57,5 +57,9 @@
 		{
 			return mb_substr(strip_tags($str), 0, $len, 'utf-8');
 		}
+        public function randSay()
+        {
+            
+        }
 	}
 ?>

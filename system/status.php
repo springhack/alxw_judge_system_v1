@@ -167,7 +167,7 @@
                 	<?php echo $res['id']; ?>
                 </td>
                 <td>
-                	<?php echo $res['user']; ?>
+                	<a href='person.php?id=<?php echo $res['user']; ?>'><?php echo $res['user']; ?></a>
                 </td>
                 <td>
                     <font style='color:#1976D2;text-decoration:underline;cursor:pointer;' onclick="javascript:location.href='view.php?id=<?php

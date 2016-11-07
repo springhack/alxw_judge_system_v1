@@ -28,7 +28,7 @@ $(function () {
 		$('.page_btn').addClass('mui-btn mui-btn--flat mui-btn--accent').removeClass('page_btn');
 		$('.page_input').addClass('mui-btn mui-btn--flat mui-btn--accent').removeClass('page_input');
 		$('table').addClass('mui-table mui-panel').css('background-color', '#EEE');
-		$('table a').addClass('mui-btn mui-btn--accent');
+		//$('table a').addClass('mui-btn mui-btn--accent');
 		$('input[type=submit]').addClass('mui-btn mui-btn--accent');
 		$('#search .item').addClass('mui-textfield mui-textfield--float-label').css({
             'display' : 'inline-block',

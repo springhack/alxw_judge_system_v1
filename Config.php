@@ -14,7 +14,7 @@
 			'AUTO_PASS' => 'sksks',
             'PROBLEM_NUMBER_PER_PAGE' => 20,
             'STATUS_NUMBER_PER_PAGE' => 10,
-            'CODER_NUMBER_PER_PAGE' => 10
+            'CODER_NUMBER_PER_PAGE' => 20
 		);
 	$sql = NULL;
 	function __autoload($class)
@@ -33,5 +33,12 @@
 
 	if (!function_exists('mysql_connect'))
 		require_once('system/mysql_mysqli.php');
+
+    if (!file_exists('Quote.php'))
+        $Config['RAND_QUOTE'] = require_once('Quote.php');
+    else
+        $Config['RAND_QUOTE'] = array(
+            '神说，春哥既是一切－－'
+        );
 
 ?>

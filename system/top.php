@@ -17,7 +17,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Problem List</title>
+        <title>Coder List</title>
     </head>
     <body>
     	<center>
@@ -25,17 +25,18 @@
         	<h1>Coder List</h1>
 		<table border='1'>
             <tr>
-                <td width='100'>User ID</td>
-                <td width='500'>Quote</td>
-                <td width='500'>Accepted</td>
-                <td width='500'>Submissions</td>
-                <td width='500'>AC Ratio</td>
+                <td width='50'>#</td>
+                <td width='200'>User ID</td>
+                <td>Quote</td>
+                <td width='50'>Accepted</td>
+                <td width='50'>Submissions</td>
+                <td width='50'>Ratio</td>
             </tr>
     	<?php
 			$sstart = isset($_GET['page'])?(intval($_GET['page'])-1)*$Config['CODER_NUMBER_PER_PAGE']:0;
-			$list = $db->from('Users')->order('ac')->limit($Config['CODER_NUMBER_PER_PAGE'], $sstart)->select()->fetch_all();
+			$list = $db->from('Users')->order('DESC, su ASC', 'ac')->limit($Config['CODER_NUMBER_PER_PAGE'], $sstart)->select()->fetch_all();
 			for ($i=0;$i<count($list);++$i)
-				echo "<tr><td>".$list[$i]['user']."</td><td>".$list[$i]['user']."</td><td>".$list[$i]['ac']."</td><td>".$list[$i]['su']."</td><td>".intval($list[$i]['ac']*100/$list[$i]['su'])."</td></tr>";
+				echo "<tr><td>".($sstart + $i + 1)."</td><td><a href='person.php?id=".$list[$i]['user']."'>".$list[$i]['user']."</a></td><td>".unserialize($list[$i]['json'])['quote']."</td><td>".$list[$i]['ac']."</td><td>".$list[$i]['su']."</td><td>".intval($list[$i]['ac']*100/$list[$i]['su'])."%</td></tr>";
 			echo "</table>";
 		?><br /><br />
 		<script language="javascript" src="Widget/pageSwitcher/pageSwitcher.js"></script>
