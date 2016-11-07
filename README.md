@@ -39,6 +39,7 @@ Linux新手请看鸟哥的私房菜http://vbird.dic.ksu.edu.tw/linux_basic/linux
 
 最新更新
 
+    啊咧添加了总排名－－
     添加了Rejudge功能
     完善比赛功能
     添加了编译信息显示
