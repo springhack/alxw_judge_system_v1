@@ -14,7 +14,7 @@
             if (isset($_POST['quote']))
                 $json['quote'] = htmlspecialchars($_POST['quote']);
             $pass = $user->getPass();
-            if (isset($_POST['new']))
+            if (isset($_POST['new']) && !empty($_POST['new']))
                 if ($user->str_check($_POST['new']))
                     $pass = $user->getSalt($_POST['new']);
                 else
