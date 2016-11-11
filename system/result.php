@@ -25,7 +25,7 @@
 			require_once('classes/Record.php');
 			$db = new MySQL();
 			$arr = $db->from('Record')->where('`id`=\''.$_GET['id'].'\'')->select('id,user')->fetch_all();
-            if ($arr[0]['user'] != $app->user->getUser())
+            if (!$app->user->isLogin() || ($arr[0]['user'] != $app->user->getUser() && $app->user->getPower() != 0))
                 die('<center><h3><a href=\'admin/status.php?action=login&url=../index.php\'>You hane no permission to view this page !</a></h3></center>');
 		?>
 		<div id='progress'><div id='now'></div></div>
