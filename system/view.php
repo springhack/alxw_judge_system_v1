@@ -1,9 +1,3 @@
-<?php /**
-        Author: SpringHack - springhack@live.cn
-        Last modified: 2016-05-12 19:22:56
-        Filename: view.php
-        Description: Created by SpringHack using vim automatically.
-**/ ?>
 <?php
 	require_once('api.php');
 	$db = new MySQL();
@@ -54,6 +48,10 @@
 				if ($res['hide'] == 'yes')
 					die('<center><h1><a href="index.php" style="color: #000000;">No such problem or permission denied !</a></h1></center></body></html>');
 			}
+            function dealTitle($str)
+            {
+                return ucwords(str_replace('_', ' ', $str));
+            }
 		?>
         <h1>View Problem</h1>
         <table border="1">
@@ -75,7 +73,7 @@
                 $pro_info = $pro->getInfo();
                 foreach ($pro_info as $key => $val)
                 {
-                    echo "<tr><td width='200'><h2>".$key."</h2></td><td width='800'>";
+                    echo "<tr><td width='200'><h2>".dealTitle($key)."</h2></td><td width='800'>";
                     if (strstr($key, "sample_"))
                         echo "<pre>".$val."</pre></td></tr>";
                     else

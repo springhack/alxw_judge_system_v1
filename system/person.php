@@ -1,9 +1,3 @@
-<?php /**
-        Author: SpringHack - springhack@live.cn
-        Last modified: 2016-11-07 11:03:05
-        Filename: top.php
-        Description: Created by SpringHack using vim automatically.
-**/ ?>
 <?php
 	if (!file_exists('.install'))
 	{
