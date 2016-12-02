@@ -136,16 +136,8 @@
                 if (isset($_GET['oid']))
                     if(!empty($_GET['oid']) && is_numeric($_GET['oid']))
                         $rest_search .= " and `oid`='".intval($_GET['oid'])."'";
-                if (isset($_GET['user']))
-                    if(!empty($_GET['user']))
-                        if ($app->user->str_check($_GET['user']))
-                            $rest_search .= " and `user`='".$_GET['user']."'";
-                if (isset($_GET['result']))
-                    if(is_numeric($_GET['result']) && intval($_GET['result']) >= 0 && intval($_GET['result']) <= 9)
-                        $rest_search .= " and binary `result`='".$rest_result[intval($_GET['result'])]."'";
 				if (isset($_GET['cid']))
 				{
-					$arr = $db->from('Record')->where("`contest`='".intval($_GET['cid'])."'".$rest_search)->limit($Config['STATUS_NUMBER_PER_PAGE'], $start)->order('DESC', 'time')->select('id')->fetch_all();
 					$contest_fix = $db->from('Contest')->where("`id`='".intval($_GET['cid'])."'")->select('list')->fetch_one();
 					if ($contest_fix)
 					{
@@ -154,8 +146,21 @@
 						$hash = array();
 						for ($i=0;$i<count($tmp_arr);++$i)
 							$hash[$tmp_arr[$i]] = chr(65 + $i);
+                        if (isset($_GET['oid']))
+                            if(!empty($_GET['oid']) && preg_match("/^[a-z]+$/i", $_GET['oid']))
+                                $rest_search .= " and `oid`='".array_search(strtoupper($_GET['oid']), $hash)."'";
 					}
-				} else
+				}
+                if (isset($_GET['user']))
+                    if(!empty($_GET['user']))
+                        if ($app->user->str_check($_GET['user']))
+                            $rest_search .= " and `user`='".$_GET['user']."'";
+                if (isset($_GET['result']))
+                    if(is_numeric($_GET['result']) && intval($_GET['result']) >= 0 && intval($_GET['result']) <= 9)
+                        $rest_search .= " and binary `result`='".$rest_result[intval($_GET['result'])]."'";
+				if (isset($_GET['cid']))
+					$arr = $db->from('Record')->where("`contest`='".intval($_GET['cid'])."'".$rest_search)->limit($Config['STATUS_NUMBER_PER_PAGE'], $start)->order('DESC', 'time')->select('id')->fetch_all();
+				else
 					$arr = $db->from('Record')->where("`contest`='0'".$rest_search)->limit($Config['STATUS_NUMBER_PER_PAGE'], $start)->order('DESC', 'time')->select('id')->fetch_all();
 				for ($i=0;$i<count($arr);++$i)
 				{
@@ -200,7 +205,7 @@
                 	<?php echo $res['lang']; ?>
                 </td>
                 <td>
-                	<?php echo date("Y-M-D H:i:s", $res['time']); ?>
+                	<?php echo date("Y-m-d H:i:s", $res['time']); ?>
                 </td>
             </tr>
                     <?php
