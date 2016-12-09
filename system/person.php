@@ -39,6 +39,9 @@
                         User ID
                     </td>
                     <td>
+                        Nick Name
+                    </td>
+                    <td>
                         Accepted
                     </td>
                     <td>
@@ -51,6 +54,9 @@
                 <tr>
                     <td>
                         <?php echo $info['user']; ?>
+                    </td>
+                    <td>
+                        <?php echo unserialize($info['json'])['nick']; ?>
                     </td>
                     <td>
                         <?php echo $info['ac']; ?>

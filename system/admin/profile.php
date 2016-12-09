@@ -19,7 +19,12 @@
                     $pass = $user->getSalt($_POST['new']);
                 else
                     $alert = '修改失败!';
-			$flag = $user->userRenew($user->getUser(), $pass, serialize($json), $user->getPower());
+            if (isset($_POST['nick']) && $user->str_check($_POST['nick'], 30))
+            {
+                $json['nick'] = $_POST['nick'];
+                $_SESSION['nick'] = $_POST['nick'];
+            }
+    	    $flag = $user->userRenew($user->getUser(), $pass, serialize($json), $user->getPower());
         	if ($flag && $alert == '')
         	    $alert = "修改成功!";
 		} else
@@ -56,6 +61,7 @@
                     <label>账号: </label><?php echo $user->getUser(); ?><br /><br />
                     <label>权限: </label><?php echo ($user->getPower() == 0)?"管理员":"普通用户"; ?><br /><br />
                     <label>资料修改:</label><br /><br />
+                    <label>昵称: </label><input type='text' name='nick' value='<?php echo $user->getJSON($user->getUser())['nick']; ?>' /><br /><br />
                     <label> 原密码: </label><input type="password" name="old" /> (<font style="color: #F00;">必填</font>)<br /><br />
                     <label> 新密码: </label><input type="password" name="new" /> (<font style="color: #0F0;">不修改请留空</font>)<br /><br />
                     <label> 个性签名: </label><br />

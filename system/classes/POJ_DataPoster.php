@@ -31,6 +31,7 @@
 					'tid' => $id,
 					'rid' => '1234',
 					'user' => $_SESSION['user'],
+					'nick' => $_SESSION['nick'],
 					'time' => time(),
 					'memory' => 'N/A',
 					'long' => 'N/A',

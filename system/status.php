@@ -15,6 +15,7 @@
 				'rid' => 'text',
 				'tid' => 'text',
 				'user' => 'text',
+				'nick' => 'text',
 				'time' => 'text',
 				'memory' => 'text',
 				'long' => 'text',
