@@ -31,7 +31,7 @@
 				{
                     if (isset($_POST['vcode']) && $_SESSION['vcode'] == md5($_POST['vcode']))
                     {
-					if (!$user->user_pass_check($_POST['user'], $_POST['pass']) || !$user->nick_check($_POST['nick'], 30))
+					if (!$user->user_pass_check($_POST['user'], $_POST['pass']) || !$user->nick_check($_POST['nick'], 90))
 					{
 						$alert = "注册失败，账号密码不符合要求";
 						break;
