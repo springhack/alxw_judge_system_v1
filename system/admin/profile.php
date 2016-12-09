@@ -19,7 +19,7 @@
                     $pass = $user->getSalt($_POST['new']);
                 else
                     $alert = '修改失败!';
-            if (isset($_POST['nick']) && $user->str_check($_POST['nick'], 30))
+            if (isset($_POST['nick']) && $user->nick_check($_POST['nick'], 30))
             {
                 $json['nick'] = $_POST['nick'];
                 $_SESSION['nick'] = $_POST['nick'];
