@@ -60,7 +60,7 @@
 			$list = unserialize($res_t['rank']);
 			if ((time() - intval($time)) > 30)
 			{
-                $u_list = $db->from("Record")->where("`contest`='".$_GET['cid']."'")->select('distinct user,nick')->fetch_all();
+                $u_list = $db->query("select distinct Record.user,Users.json from Record left join Users on Record.user=Users.user where Record.contest=".$_GET['cid'].";")->fetch_all();
 			    $res_all = $db->from('Record')->where("`contest`='".$_GET['cid']."'")->select()->order('ASC', 'time')->fetch_all();
 				$p_list = explode(',', $res_t['list']);
 				$start = $res_t['time_s'];
@@ -69,7 +69,7 @@
 				{
 					$list[$i] = array(
 							'user' => $u_list[$i]['user'],
-                            'nick' => $u_list[$i]['nick'],
+                            'nick' => unserialize($u_list[$i]['json'])['nick'],
 							'time' => 0,
 							'deal' => 0,
 							'do' => 0
