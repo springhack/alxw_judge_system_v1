@@ -31,12 +31,20 @@
 				", $sql);
 			}
 		}
-		public function str_check($str)
+		public function str_check($str, $len = 20)
 		{
 			$strlen = strlen($str);
 			if(!preg_match("/^[a-zA-Z0-9_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]+$/", $str)){
 				return false;
-			} elseif ( 20 < $strlen || $strlen < 2 ) {
+			} elseif ( $len < $strlen || $strlen < 2 ) {
+				return false;
+			}
+			return true;
+		}
+		public function nick_check($str, $len = 20)
+		{
+			$strlen = strlen($str);
+			if ( $len < $strlen || $strlen < 2 ) {
 				return false;
 			}
 			return true;
@@ -130,6 +138,7 @@
 			while($row = mysql_fetch_array($result))
 			{
 				$_SESSION['user'] = $user;
+				$_SESSION['nick'] = $row['nick'];
 				$_SESSION['pass'] = $pass;
 				return true;
 				break;

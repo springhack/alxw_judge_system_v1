@@ -1,3 +1,4 @@
+
 <?php /**
         Author: SpringHack - springhack@live.cn
         Last modified: 2016-05-28 09:48:32
@@ -53,14 +54,14 @@
 		?>
     	<?php
 			$res_t = $db->from('Contest')->where("`id`='".$_GET['cid']."'")->select()->fetch_one();
-			$res_all = $db->from('Record')->where("`contest`='".$_GET['cid']."'")->select()->order('ASC', 'time')->fetch_all();
 			if (!$res_t)
                 die('<center><h1><a href="index.php" style="color: #000000;">No such contest !</a></h1></center></body></html>');
 			$time = intval($res_t['cache']);
 			$list = unserialize($res_t['rank']);
 			if ((time() - intval($time)) > 30)
 			{
-                $u_list = $db->from("Record")->where("`contest`='".$_GET['cid']."'")->select('distinct user')->fetch_all();
+                $u_list = $db->query("select distinct Record.user,Users.json from Record left join Users on Record.user=Users.user where Record.contest=".$_GET['cid'].";")->fetch_all();
+			    $res_all = $db->from('Record')->where("`contest`='".$_GET['cid']."'")->select()->order('ASC', 'time')->fetch_all();
 				$p_list = explode(',', $res_t['list']);
 				$start = $res_t['time_s'];
 				$list = array();
@@ -68,6 +69,7 @@
 				{
 					$list[$i] = array(
 							'user' => $u_list[$i]['user'],
+                            'nick' => unserialize($u_list[$i]['json'])['nick'],
 							'time' => 0,
 							'deal' => 0,
 							'do' => 0
@@ -81,38 +83,17 @@
 								$yes = $item;
 								break;
 							}
-						/**
-						$yes = $db->from("Record")
-									->where("`contest`='".$_GET['cid']."' AND `oid`='".$p_list[$j]."' AND `user`='".$u_list[$i]['user']."' AND `result`='Accepted'")
-									->order("ASC", "time")
-									->select()
-									->fetch_one();
-						**/
 						if ($yes == '')
 						{
 							$no = 0;
 							foreach ($res_all as $item)
 								if ($item['oid'] == $p_list[$j] && $item['user'] == $u_list[$i]['user'] && $item['result'] != 'Accepted' && $item['result'] != 'Submit Error')
 									++$no;
-							/**
-							$no = $db->from("Record")
-									->where("`contest`='".$_GET['cid']."' AND `oid`='".$p_list[$j]."' AND `user`='".$u_list[$i]['user']."' AND `result`<>'Accepted' AND `result`<>'Submit Error'")
-									->order("ASC", "time")
-									->select()
-									->num_rows();
-							**/
 						} else {
 							$no = 0;
 							foreach ($res_all as $item)
 								if ($item['oid'] == $p_list[$j] && $item['user'] == $u_list[$i]['user'] && $item['result'] != 'Accepted' && $item['result'] != 'Submit Error' && $item['time'] < $yes['time'])
 									++$no;
-							/**
-							$no = $db->from("Record")
-									->where("`contest`='".$_GET['cid']."' AND `oid`='".$p_list[$j]."' AND `user`='".$u_list[$i]['user']."' AND `result`<>'Accepted' AND `result`<>'Submit Error' AND `time`<".$yes['time'])
-									->order("ASC", "time")
-									->select()
-									->num_rows();
-							**/
 						}
 						$list[$i][$j] = array(
 								'pid' => $p_list[$j],
@@ -173,7 +154,7 @@
     		<table data-type="rank">
             	<tr data-type="rank" style="color: #FFF; background-color: #0995C4;">
                 	<td data-type="rank">
-                    	User Name
+                    	Nick Name
                     </td>
                     <td data-type="rank" width="40" align="center">
                         Deal
@@ -189,7 +170,7 @@
             	<?php
                 	for ($i=0;$i<count($list);++$i)
 					{
-						echo '<tr data-type="rank"'.(($i%2)?' style="background-color: #CEFDFF;"':'').'><td data-type="rank" style=" border-bottom: 1px dotted #CCCCCC;" width="200">'.$list[$i]['user'].'</td>';
+						echo '<tr data-type="rank"'.(($i%2)?' style="background-color: #CEFDFF;"':'').'><td data-type="rank" style=" border-bottom: 1px dotted #CCCCCC;" width="200">'.$list[$i]['nick'].'</td>';
 						echo '<td data-type="rank" align="center" style=" border-bottom: 1px dotted #CCCCCC;">'.$list[$i]['deal'].'</td>';
 						echo '<td data-type="rank" align="center" style=" border-bottom: 1px dotted #CCCCCC;">'.secToTime($list[$i]['time']).'</td>';
 						foreach ($list[$i] as $key => $val)

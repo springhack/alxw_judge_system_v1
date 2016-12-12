@@ -36,7 +36,7 @@
 			$sstart = isset($_GET['page'])?(intval($_GET['page'])-1)*$Config['CODER_NUMBER_PER_PAGE']:0;
 			$list = $db->from('Users')->order('DESC, su ASC', 'ac')->limit($Config['CODER_NUMBER_PER_PAGE'], $sstart)->select()->fetch_all();
 			for ($i=0;$i<count($list);++$i)
-				echo "<tr><td>".($sstart + $i + 1)."</td><td><a href='person.php?id=".$list[$i]['user']."'>".$list[$i]['user']."</a></td><td>".unserialize($list[$i]['json'])['quote']."</td><td>".$list[$i]['ac']."</td><td>".$list[$i]['su']."</td><td>".intval($list[$i]['ac']*100/$list[$i]['su'])."%</td></tr>";
+				echo "<tr><td>".($sstart + $i + 1)."</td><td><a href='person.php?id=".$list[$i]['user']."'>".unserialize($list[$i]['json'])['nick']."</a></td><td>".unserialize($list[$i]['json'])['quote']."</td><td>".$list[$i]['ac']."</td><td>".$list[$i]['su']."</td><td>".intval($list[$i]['ac']*100/$list[$i]['su'])."%</td></tr>";
 			echo "</table>";
 		?><br /><br />
 		<script language="javascript" src="Widget/pageSwitcher/pageSwitcher.js"></script>

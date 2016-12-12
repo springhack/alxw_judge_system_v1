@@ -31,12 +31,12 @@
 				{
                     if (isset($_POST['vcode']) && $_SESSION['vcode'] == md5($_POST['vcode']))
                     {
-					if (!$user->user_pass_check($_POST['user'], $_POST['pass']))
+					if (!$user->user_pass_check($_POST['user'], $_POST['pass']) || !$user->nick_check($_POST['nick'], 90))
 					{
 						$alert = "注册失败，账号密码不符合要求";
 						break;
 					}
-					if ($user->userRegister($_POST['user'], $user->getSalt($_POST['pass']), 'a:1:{s:5:"quote";s:0:"";}'))
+					if ($user->userRegister($_POST['user'], $user->getSalt($_POST['pass']), serialize(array('quote' => '', 'nick' => htmlspecialchars($_POST['nick'])))))
 					{
 						$alert = "注册成功,3秒后返回!";
 						$return = true;
@@ -113,6 +113,7 @@
                 	注册<hr /><br />
                     <form action="status.php?action=register&url=<?php echo $url; ?>" method="post">
                     账号:&nbsp;<input type="text" name="user" /><br /><br />
+                    昵称:&nbsp;<input type="text" name="nick" /><br /><br />
                     密码:&nbsp;<input type="password" name="pass" id="pass" /><br /><br />
                     重复:&nbsp;<input type="password" name="check" id="check" onkeyup="javascript:deal();" /><br /><br />
                     <div style="text-align: right;" id='vcan_2'>
