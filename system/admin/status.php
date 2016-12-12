@@ -36,7 +36,7 @@
 						$alert = "注册失败，账号密码不符合要求";
 						break;
 					}
-					if ($user->userRegister($_POST['user'], $user->getSalt($_POST['pass']), serialize(array('quote' => '', 'nick' => $_POST['nick']))))
+					if ($user->userRegister($_POST['user'], $user->getSalt($_POST['pass']), serialize(array('quote' => '', 'nick' => htmlspecialchars($_POST['nick'])))))
 					{
 						$alert = "注册成功,3秒后返回!";
 						$return = true;

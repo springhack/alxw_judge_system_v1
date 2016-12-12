@@ -44,9 +44,7 @@
 		public function nick_check($str, $len = 20)
 		{
 			$strlen = strlen($str);
-			if(!preg_match("/^[a-zA-Z0-9_：；‘“，。／、［］｛｝（）《》—－＋＝＊¥\x7f-\xff]+$/", $str)){
-				return false;
-			} elseif ( $len < $strlen || $strlen < 2 ) {
+			if ( $len < $strlen || $strlen < 2 ) {
 				return false;
 			}
 			return true;

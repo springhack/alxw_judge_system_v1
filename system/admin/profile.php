@@ -21,7 +21,7 @@
                     $alert = '修改失败!';
             if (isset($_POST['nick']) && $user->nick_check($_POST['nick'], 90))
             {
-                $json['nick'] = $_POST['nick'];
+                $json['nick'] = htmlspecialchars($_POST['nick']);
                 $_SESSION['nick'] = $_POST['nick'];
             }
     	    $flag = $user->userRenew($user->getUser(), $pass, serialize($json), $user->getPower());
