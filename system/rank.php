@@ -1,7 +1,6 @@
-
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-05-28 09:48:32
+        Last modified: 2016-12-13 11:19:27
         Filename: rank.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
@@ -64,10 +63,10 @@
 			    $res_all = $db->from('Record')->where("`contest`='".$_GET['cid']."'")->select()->order('ASC', 'time')->fetch_all();
 				$p_list = explode(',', $res_t['list']);
 				$start = $res_t['time_s'];
-				$list = array();
+                $undeal = array();
 				for ($i=0;$i<count($u_list);++$i)
 				{
-					$list[$i] = array(
+					$undeal['ss_'.$u_list[$i]['user']] = array(
 							'user' => $u_list[$i]['user'],
                             'nick' => unserialize($u_list[$i]['json'])['nick'],
 							'time' => 0,
@@ -76,39 +75,49 @@
 						);
 					for ($j=0;$j<count($p_list);++$j)
 					{
-						$yes = '';
-						foreach ($res_all as $item)
-							if ($item['oid'] == $p_list[$j] && $item['user'] == $u_list[$i]['user'] && $item['result'] == 'Accepted')
-							{
-								$yes = $item;
-								break;
-							}
-						if ($yes == '')
-						{
-							$no = 0;
-							foreach ($res_all as $item)
-								if ($item['oid'] == $p_list[$j] && $item['user'] == $u_list[$i]['user'] && $item['result'] != 'Accepted' && $item['result'] != 'Submit Error')
-									++$no;
-						} else {
-							$no = 0;
-							foreach ($res_all as $item)
-								if ($item['oid'] == $p_list[$j] && $item['user'] == $u_list[$i]['user'] && $item['result'] != 'Accepted' && $item['result'] != 'Submit Error' && $item['time'] < $yes['time'])
-									++$no;
-						}
-						$list[$i][$j] = array(
+						$undeal['ss_'.$u_list[$i]['user']]['ss_'.$p_list[$j]] = array(
 								'pid' => $p_list[$j],
-								'result' => ($yes == "")?"no":"yes",
-								'time' => ($yes == "")?"0":(intval($yes['time']) - $start),
-								'wrong' => $no
+								'result' => 'no',
+								'time' => 0,
+								'wrong' => 0
 							);
-						if ($yes != "" || $no != 0)
-							$list[$i]['do']++;
-						if ($yes != "")
-						{
-							$list[$i]['time'] += ($list[$i][$j]['time'] + $list[$i][$j]['wrong']*1200);
-							$list[$i]['deal']++;
-						}
 					}
+				}
+                foreach ($res_all as $item)
+                {
+                    if ($item['result'] == 'Accepted')
+                    {
+                        if ($undeal['ss_'.$item['user']]['ss_'.$item['oid']]['result'] != 'yes')
+                        {
+                            $undeal['ss_'.$item['user']]['ss_'.$item['oid']]['result'] = 'yes';
+                            $undeal['ss_'.$item['user']]['ss_'.$item['oid']]['time'] = $item['time'] - $start;
+                        }
+                        $undeal['ss_'.$item['user']]['do']++;
+                    } else {
+                        if ($item['result'] != 'Submit Error')
+                        {
+                            if ($undeal['ss_'.$item['user']]['ss_'.$item['oid']]['result'] != 'yes')
+                            {
+                                $undeal['ss_'.$item['user']]['ss_'.$item['oid']]['wrong']++;
+                                $undeal['ss_'.$item['user']]['do']++;
+                            }
+                        }
+                    }
+                }
+				$list = array();
+			    for ($i=0;$i<count($u_list);++$i)
+				{
+					$list[$i] = $undeal['ss_'.$u_list[$i]['user']];
+					for ($j=0;$j<count($p_list);++$j)
+                    {
+						$list[$i][$j] = $undeal['ss_'.$u_list[$i]['user']]['ss_'.$p_list[$j]];
+                        unset($list[$i]['ss_'.$u_list[$i]['user']]);
+                        if ($list[$i][$j]['result'] == 'yes')
+                        {
+    					    $list[$i]['time'] += ($list[$i][$j]['time'] + $list[$i][$j]['wrong']*1200);
+                            $list[$i]['deal']++;
+                        }
+                    }
 				}
 				$t_list = array();
 				for ($t=0;$t<count($list);++$t)
@@ -138,11 +147,15 @@
 								}
 						}
 					}
+                $rank = serialize($list);
+                if (!get_magic_quotes_gpc())
+                    $rank = addslashes($rank);
 				$db->set(array(
-                            'rank' => serialize($list),
+                            'rank' => $rank,
 							'cache' => time()
                         ))->where("`id`='".$_GET['cid']."'")
                         ->update('Contest');
+                print_r($db->error());
 			}
 		?>
         <center>
