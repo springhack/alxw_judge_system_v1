@@ -1,6 +1,6 @@
 <?php /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2016-05-17 17:23:29
+        Last modified: 2016-12-13 20:31:14
         Filename: contest.php
         Description: Created by SpringHack using vim automatically.
 **/ ?>
@@ -28,7 +28,7 @@
 						'time_e' => 'text',
 						'password' => 'text',
 						'cache' => 'text',
-						'rank' => 'text',
+						'rank' => 'longtext',
 						'time' => 'text'
 					))->create("Contest");
 			}
