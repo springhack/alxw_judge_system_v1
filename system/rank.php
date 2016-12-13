@@ -94,7 +94,7 @@
                         }
                         $undeal['ss_'.$item['user']]['do']++;
                     } else {
-                        if ($item['result'] != 'Submit Error')
+                        if ($item['result'] != 'System Error')
                         {
                             if ($undeal['ss_'.$item['user']]['ss_'.$item['oid']]['result'] != 'yes')
                             {
