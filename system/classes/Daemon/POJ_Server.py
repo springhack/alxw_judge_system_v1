@@ -78,7 +78,7 @@ def Worker(item, oj_user, oj_pass, index):
             }, cookie)
     except Exception,e:
         Log('[E] => Login failed !' + str(e))
-        db.run_sql("update Record set `rid`='NONE',`memory`='0K',`long`='0MS',`lang`='Unknown',`result`='Submit Error' where `id`='%s'" % item[0])
+        db.run_sql("update Record set `rid`='NONE',`memory`='0K',`long`='0MS',`lang`='Unknown',`result`='System Error' where `id`='%s'" % item[0])
         ExitThread(index, cookie)
         thread.exit_thread()
     # Post code
@@ -93,7 +93,7 @@ def Worker(item, oj_user, oj_pass, index):
             }, cookie)
     except Exception,e:
         Log('[E] => Submit failed !' + str(e))
-        db.run_sql("update Record set `rid`='NONE',`memory`='0K',`long`='0MS',`lang`='Unknown',`result`='Submit Error' where `id`='%s'" % item[0])
+        db.run_sql("update Record set `rid`='NONE',`memory`='0K',`long`='0MS',`lang`='Unknown',`result`='System Error' where `id`='%s'" % item[0])
         ExitThread(index, cookie)
         thread.exit_thread()
     # Get RunID
@@ -103,7 +103,7 @@ def Worker(item, oj_user, oj_pass, index):
         html, t = CurlGET("http://poj.org/status?problem_id=%s&user_id=%s&result=&language=%s" % (item[3], oj_user, item[9]), cookie)
     except Exception,e:
         Log('[E] => Get RunID failed !' + str(e))
-        db.run_sql("update Record set `rid`='NONE',`memory`='0K',`long`='0MS',`lang`='Unknown',`result`='Submit Error' where `id`='%s'" % item[0])
+        db.run_sql("update Record set `rid`='NONE',`memory`='0K',`long`='0MS',`lang`='Unknown',`result`='System Error' where `id`='%s'" % item[0])
         ExitThread(index, cookie)
         thread.exit_thread()
     # Get RunID List
@@ -117,19 +117,19 @@ def Worker(item, oj_user, oj_pass, index):
                 break
     except Exception,e:
         Log('[E] => Get RunID failed !' + str(e))
-        db.run_sql("update Record set `rid`='NONE',`memory`='0K',`long`='0MS',`lang`='Unknown',`result`='Submit Error' where `id`='%s'" % item[0])
+        db.run_sql("update Record set `rid`='NONE',`memory`='0K',`long`='0MS',`lang`='Unknown',`result`='System Error' where `id`='%s'" % item[0])
         ExitThread(index, cookie)
         thread.exit_thread()
     # No RunID, exit
     if RunID == -1:
-        db.run_sql("update Record set `rid`='NONE',`memory`='0K',`long`='0MS',`lang`='Unknown',`result`='Submit Error' where `id`='%s'" % item[0])
+        db.run_sql("update Record set `rid`='NONE',`memory`='0K',`long`='0MS',`lang`='Unknown',`result`='System Error' where `id`='%s'" % item[0])
         ExitThread(index, cookie)
         thread.exit_thread()
     # Match result
     match = re.findall(r"<tr align=center><td>%s</td><td>.*</td><td>.*</td><td>.*<font color=\w*>(.*)</font>.*</td><td>(.*)</td><td>(.*)</td><td><a href=.*>(.*)</a></td><td>.*</td><td>.*</td></tr>" % RunID, html)
     # No result, exit
     if len(match) <= 0:
-        db.run_sql("update Record set `rid`='NONE',`memory`='0K',`long`='0MS',`lang`='Unknown',`result`='Submit Error' where `id`='%s'" % item[0])
+        db.run_sql("update Record set `rid`='NONE',`memory`='0K',`long`='0MS',`lang`='Unknown',`result`='System Error' where `id`='%s'" % item[0])
         ExitThread(index, cookie)
         thread.exit_thread()
     result = list(match[0])
@@ -141,12 +141,12 @@ def Worker(item, oj_user, oj_pass, index):
         try:
             html, t = CurlGET("http://poj.org/status?problem_id=%s&user_id=%s&result=&language=%s" % (item[3], oj_user, item[8]), cookie)
         except Exception,e:
-            db.run_sql("update Record set `rid`='NONE',`memory`='0K',`long`='0MS',`lang`='Unknown',`result`='Submit Error' where `id`='%s'" % item[0])
+            db.run_sql("update Record set `rid`='NONE',`memory`='0K',`long`='0MS',`lang`='Unknown',`result`='System Error' where `id`='%s'" % item[0])
             ExitThread(index, cookie)
             thread.exit_thread()
         match = re.findall(r"<tr align=center><td>%s</td><td>.*</td><td>.*</td><td>.*<font color=\w*>(.*)</font>.*</td><td>(.*)</td><td>(.*)</td><td><a href=.*>(.*)</a></td><td>.*</td><td>.*</td></tr>" % RunID, html)
         if len(match) <= 0:
-            db.run_sql("update Record set `rid`='NONE',`memory`='0K',`long`='0MS',`lang`='Unknown',`result`='Submit Error' where `id`='%s'" % item[0])
+            db.run_sql("update Record set `rid`='NONE',`memory`='0K',`long`='0MS',`lang`='Unknown',`result`='System Error' where `id`='%s'" % item[0])
             ExitThread(index, cookie)
             thread.exit_thread()
         result = list(match[0])
